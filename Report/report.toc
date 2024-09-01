@@ -3,5 +3,5 @@
 \contentsline {subsection}{\numberline {2.1}Week 1}{2}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Week 2}{3}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}\ldots }{3}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Lessons from the Assignments}{3}{section.3}%
-\contentsline {section}{\numberline {4}Conclusion}{3}{section.4}%
+\contentsline {section}{\numberline {3}Lessons from the Assignments}{4}{section.3}%
+\contentsline {section}{\numberline {4}Conclusion}{4}{section.4}%
