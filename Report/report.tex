@@ -168,7 +168,7 @@ rw[succ_eq_add_one]
 rfl
 \end{lstlisting}
 
-For specifically level 5/8, we can see that the Lean proof, \texttt{rw[add\_zero]} corresponds to the proof Algorithm 1: Addition, in that any variable added by zero will ultimately equal just the variable. For example: $a + 0 = a$.
+For level 5/8 specifically, we can see that the Lean proof, \texttt{rw[add\_zero]}, corresponds to Proof Algorithm 1: Addition, in that any variable added to zero will ultimately equal just the variable. For example: $a + 0 = a$.
 
 From this homework, I learned how to use the Lean proof and saw how each function operated exactly like algorithms and proofs I had used in Discrete Mathematics.
 
@@ -198,9 +198,132 @@ If the way computers have been taught mathematics is based purely on successors 
 
 \subsection{Week 2}
 
-(Delete:) Week 2 (and all the other weeks) should follow the same pattern as Week 1. Even if there is a week without homework, notes and comments (see above) are still expected.
+\subsubsection*{Notes}
 
-\subsection{\ldots}
+Recursion, in coding, allows for more simplistic code that is easier to read, scale, and apply. 
+
+Regarding the allowing of typos in coding, code should be non-ambigious because coding should be universal and should work the same within the same virtual machine regardless of how you access it. We see examples of this in GitHub's copilot since it only makes suggestions that are non-ambigious and can work on any machine, as long as they have the correct virtual machine.
+
+Lean contains tactics, Ex: rw, and theorems, Ex: one\_eq\_succ\_zero. Tactics are commands while theorems are logical propositions.
+
+\subsubsection*{Homework}
+Level 1/5:
+\begin{lstlisting}
+0 + n = n
+induction n with d hd
+0 + 0 = 0
+rw[add_zero]
+0 = 0
+rfl
+0 + succ d = succ d
+rw[add_succ]
+succ (0 + d) = succ d
+rw[hd]
+succ d = succ d
+rfl
+\end{lstlisting}
+
+Level 2/5:
+\begin{lstlisting}
+succ a + b = succ (a + b)
+induction b with b
+succ a + 0 = succ (a + 0)
+rw[add_zero]
+succ a = succ (a + 0)
+rw[add_zero]
+succ a = succ a
+rfl
+succ a + succ b = succ (a + succ b)
+rw[add_succ]
+succ (succ a + b) = succ (a + succ b)
+rw[n_ih]
+succ (succ (a + b)) = succ (a + succ b)
+rw[add_succ]
+succ (succ (a + b)) = succ (succ (a + b))
+rfl
+\end{lstlisting}
+
+Level 3/5:
+\begin{lstlisting}
+a + b = b + a
+induction b with b hb
+a + 0 = 0 + a
+rw [add_zero]
+a = 0 + a
+rw [zero_add]
+a = a
+rfl
+a + succ b = succ b + a
+rw [add_succ]
+succ (a + b) = succ b + a
+rw [hb]
+succ (b + a) = succ b + a
+rw [succ_add]
+succ (b + a) = succ (b + a)
+rfl
+\end{lstlisting}
+
+Level 4/5:
+\begin{lstlisting}
+a + b + c = a + (b + c)
+induction c with c hc
+a + b + 0 = a + (b + 0)
+rw [add_zero]
+a + b = a + (b + 0)
+rw [add_zero]
+a + b = a + b
+rfl
+a + b + succ c = a + (b + succ c)
+rw [add_succ]
+succ (a + b + c) = a + (b + succ c)
+rw [add_succ]
+succ (a + b + c) = a + succ (b + c)
+rw [add_succ]
+succ (a + b + c) = succ (a + (b + c))
+rw [hc]
+succ (a + (b + c)) = succ (a + (b + c))
+rfl
+\end{lstlisting}
+
+Level 5/5:
+\begin{lstlisting}
+a + b + c = a + c + b
+induction c with c hc
+a + b + 0 = a + 0 + b
+rw [add_zero, add_zero]
+a + b = a + b
+rfl
+a + b + succ c = a + succ c + b
+rw [add_succ]
+succ (a + b + c) = a + succ c + b
+rw [add_succ]
+succ (a + b + c) = succ (a + c) + b
+rw [succ_add]
+succ (a + b + c) = succ (a + c + b)
+rw [hc]
+succ (a + c + b) = succ (a + c + b)
+rfl
+\end{lstlisting}
+\subsubsection*{Comments and Questions}
+
+Personally, I felt that when it comes to AI autocorrecting code, instead of being lenient towards mistyped code, AI could just simply correct the typos. This would allow for a smoother coding process wihle also creating non-ambigious code.
+
+After playing around with the Tower of Hanoi, it is apparent that recursion is invaluable in programming. We often see it as a way to neatly write code but it can also be massive time saver as apparent with the Tower of Hanoi where instead of having to, through trial and error finding out the solution, we can just use a recursive equation and plug in our values. My question then is, in what other fields can we apply recursion, as it is becoming more apparent to me that recursion can be a form of thinking rather than a field specific method?
+
+\subsubsection*{Lean Proof}
+
+\begin{align*}
+  a + b + c = a + (b + c) \\
+  a + b + 0 = a + (b + 0) == def of + \\
+  a + b = a + (b + 0) == def of + \\
+  a + b = a + b \\
+\end{align*}
+
+\subsection{Week 3}
+
+\subsubsection*{Notes}
+\subsubsection*{Homework}
+\subsubsection*{Comments and Questions}
 
 \ldots
 
