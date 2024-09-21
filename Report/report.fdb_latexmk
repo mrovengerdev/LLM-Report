@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1726511797.98912 "/Users/mrovenger/Desktop/ChapmanCode/CPSC354/Report/report.tex" "report.pdf" "report" 1726511798.6707 0
-  "/Users/mrovenger/Desktop/ChapmanCode/CPSC354/Report/report.tex" 1726511797.75215 14130 8b6cde2e545ad078f24832e1534a96b7 ""
+["pdflatex"] 1726889401.86943 "/Users/mrovenger/Desktop/ChapmanCode/CPSC354/Report/report.tex" "report.pdf" "report" 1726889402.52404 0
+  "/Users/mrovenger/Desktop/ChapmanCode/CPSC354/Report/report.tex" 1726889401.67273 15258 e6288ddb981f0f05b116b987b86591d9 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -175,10 +175,12 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1724960608.60754 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1724960563 8221428 4d1c43690847be44d9f3094167bfe27b ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "report.aux" 1726511798.58416 1132 a61574d0d2a46baf526b10e437e659fe "pdflatex"
-  "report.out" 1726511798.59314 767 00091a9e35889165a53906b816aa73fa "pdflatex"
-  "report.tex" 1726511797.75215 14130 8b6cde2e545ad078f24832e1534a96b7 ""
-  "report.toc" 1726511798.60086 502 d5d4e3136d5e01061b528b2e71168e6a "pdflatex"
+  "HW4IMG1.jpg" 1726889183.2917 538308 b9a325059982604a3c5f6d3522a73fd0 ""
+  "HW4IMG2.jpg" 1726889179.80642 471165 c465fd7b1219de4e721947720d3e5154 ""
+  "report.aux" 1726889402.44705 1245 55bbd4110aa2d7abc36537268e1b8b3d "pdflatex"
+  "report.out" 1726889402.45195 857 0f455ca59e845e73b8eb61fef5a4b7b6 "pdflatex"
+  "report.tex" 1726889401.67273 15258 e6288ddb981f0f05b116b987b86591d9 ""
+  "report.toc" 1726889402.453 574 fbbab4471323acf04fade7c8e5bcd16e "pdflatex"
   (generated)
   "report.aux"
   "report.log"

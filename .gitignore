@@ -3,3 +3,7 @@
 *.out
 *.synctex.gz
 *.toc
+*.fls
+*.fdb_latexmk
+.venv/
+*.DS_store
