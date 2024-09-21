@@ -6,3 +6,4 @@
 *.fls
 *.fdb_latexmk
 .venv/
+*.DS_store
