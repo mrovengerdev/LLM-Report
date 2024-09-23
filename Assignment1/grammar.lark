@@ -1,0 +1,18 @@
+?start: sum
+
+?sum: product
+    | sum "+" product   -> add
+    | sum "-" product   -> sub
+
+?product: power
+    | product "*" power  -> mul
+
+?power: atom
+    | power "^" atom     -> expo
+
+?atom: NUMBER           -> number
+    | "(" sum ")"
+
+%import common.NUMBER
+%import common.WS
+%ignore WS
