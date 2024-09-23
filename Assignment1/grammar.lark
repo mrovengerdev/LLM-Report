@@ -10,7 +10,7 @@
 ?power: atom
     | power "^" atom     -> expo
 
-?atom: NUMBER           -> number
+?atom: NUMBER            -> number
     | "(" sum ")"
 
 %import common.NUMBER

@@ -10,7 +10,7 @@ parser = Lark(grammar, parser='lalr', transformer=None)
 
 # Define the transformer to evaluate the parse tree
 @v_args(inline=True)
-class CalculateTree():
+class CalculateTree(Transformer):
     def number(self, n):
         return int(n)
 
@@ -38,15 +38,6 @@ def main(equation):
     parse_tree = parser.parse(equation)
     result = CalculateTree().transform(parse_tree)
     print(result)
-
-    tokens = equation.split()
-    stack = []
-    num = 0
-    sign = 1
-    result = 0
-    i = 0
-    while i < len(tokens):
-        token = tokens[i]
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

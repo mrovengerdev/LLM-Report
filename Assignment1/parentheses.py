@@ -1,10 +1,5 @@
 import sys
 
-if len(sys.argv) > 1:
-    equation = sys.argv[1]  # Get the first argument
-else:
-    print("No argument passed")
-
 class Parentheses():
     # Added stack functions
     def push(self, stack, item):
@@ -18,7 +13,7 @@ class Parentheses():
         return len(stack) == 0
     
     # Parses through equation string and checks if for each parentheses open symbol '(' there is a closing symbol ')'.
-    def equationScanner(self, equation):
+    def parenthesesScanner(self, equation):
         stack = []
         for i in range(0, len(equation)):
             if equation[i] == '(':
@@ -30,13 +25,17 @@ class Parentheses():
         return self.is_empty(stack)
     
     def check(self, equation):
-        result = self.equationScanner(equation)
+        result = self.parenthesesScanner(equation)
         if result == True:
             print("yes")
         else:
             print("no")
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        equation = sys.argv[1]  # Get the first argument
+    else:
+        print("No argument passed")
     Parentheses().check(equation)
 
 # Example run:
