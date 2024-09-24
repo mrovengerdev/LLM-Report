@@ -32,7 +32,7 @@ class Parentheses():
             print("no")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) > 1:
         equation = sys.argv[1]  # Get the first argument
     else:
         print("No argument passed")
