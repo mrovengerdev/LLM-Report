@@ -1,0 +1,22 @@
+?start: sum
+
+?sum: product
+    | sum "+" product   -> add
+    | sum "-" product   -> sub
+    | "-" sum           -> neg
+
+?product: power
+    | product "*" power  -> mul
+
+?power: log
+    | atom "^" power     -> pow
+
+?log: atom
+    | "log" atom "base" atom  -> log_base
+
+?atom: NUMBER            -> number
+    | "(" sum ")"
+
+%import common.NUMBER
+%import common.WS
+%ignore WS
