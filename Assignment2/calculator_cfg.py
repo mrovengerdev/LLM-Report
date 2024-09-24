@@ -23,6 +23,11 @@ class CalculateTree(Transformer):
         for _ in range(b):
             a += 1
         return a
+    
+    def sub(self, a, b):
+        for _ in range(b):
+            a -= 1
+        return a
 
     def mul(self, a, b):
         output = 0
@@ -30,12 +35,22 @@ class CalculateTree(Transformer):
             output += a
         return output
     
-    def expo(self, a, b):
+    def pow(self, a, b):
         output = 1
         for _ in range(b):
             output *= a
         return output
-
+    
+    def neg(self, a):
+        return -a
+    
+    def log_base(self, a, b):
+        output = 0
+        while a >= b:
+            a /= b
+            output += 1
+        return output
+    
     def int(self, n):
         return int(n)
 
