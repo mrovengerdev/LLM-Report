@@ -12,6 +12,7 @@
 \usepackage{parskip}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{listings}
   \hypersetup{
     colorlinks = true,
     urlcolor = blue,       % color of external links using \href
@@ -21,6 +22,8 @@
     }
     
 \usepackage{listings}
+
+\lstset{escapeinside={(*@}{@*)}}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -339,7 +342,209 @@ We can define well formed expressions through formal grammar. Since formal gramm
 
 If my understanding is correct, all formal languages are allowed to have their own alphabets and grammar that must be defined. However, we have found ourselves in a position where the majority of, if not all, programming langauges will use the same characters or symbols for operators and values. Thus, my question is if there is a protocol enforced that mandates the formal language used in a programming languages or has this all occurred just for ease of use?
 
-\ldots
+\subsection{Week 5}
+
+\subsubsection*{Notes}
+
+In this week's lecture, we learned about the logic behind AND and how computer's process it. This shows that a proof in logic can be represented as a program in a programming language and vice versa.
+
+Similarly, in the natural numbers game, we saw the application of these theorems which allowed us to prove theorems in Lean. So if a refresher is needed, going through the "A Lean Intro To Logic" is a good idea.
+
+\subsubsection*{Homework}
+Level 1/8:
+\begin{lstlisting}
+todo_list: P
+exact todo_list
+\end{lstlisting}
+
+Level 2/8:
+\begin{lstlisting}
+(*@ $[ Goal: P \land S ]$ @*)
+exact and_intro p s
+\end{lstlisting}
+
+Level 3/8:
+\begin{lstlisting}
+(*@ $[ Goal: (A \land I) \land O \land U ]$ @*)
+exact and_intro (and_intro a i) (and_intro o u)
+\end{lstlisting}
+
+Level 4/8:
+\begin{lstlisting}
+Assumptions:
+  (*@ $[ - vm: P \land S ]$ @*)
+have p := vm.left
+Assumptions: 
+  (*@ $[ - vm: P \land S ]$ @*)
+  (*@ $[ - p: P ]$ @*)
+exact p
+\end{lstlisting}
+
+Level 5/8:
+\begin{lstlisting}
+Assumptions:
+  (*@ $[ - h: P \land Q ]$ @*)
+have q := and_right h
+Assumptions:
+  (*@ $[ - h: P \land Q ]$ @*)
+  (*@ $[ - q: Q ]$ @*)
+exact q
+\end{lstlisting}
+
+Level 6/8:
+\begin{lstlisting}
+Assumptions:
+  (*@ $[ - h1: A \land I ]$ @*)
+  (*@ $[ - h2: O \land U ]$ @*)
+have A := and_left h1
+Assumptions:
+  (*@ $[ - h1: A \land I ]$ @*)
+  (*@ $[ - h2: O \land U ]$ @*)
+  (*@ $[ - A: A ]$ @*)
+have U := and_right h2
+Assumptions:
+  (*@ $[ - h1: A \land I ]$ @*)
+  (*@ $[ - h2: O \land U ]$ @*)
+  (*@ $[ - A: A ]$ @*)
+  (*@ $[ - U: U ]$ @*)
+exact and_intro A U
+\end{lstlisting}
+
+Level 7/8:
+\begin{lstlisting}
+Assumptions:
+  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
+have h1 := and_left h
+Assumptions:
+  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
+  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
+have h2 := and_right h1
+Assumptions:
+  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
+  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
+have h3 := and_left h2
+Assumptions:
+  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
+  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h3: (L \land C) \land L ]$ @*)
+have h4 := and_left h3
+Assumptions:
+  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
+  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h3: (L \land C) \land L ]$ @*)
+  (*@ $[ - h4: L \land C ]$ @*)
+have h5 := and_right h4
+Assumptions:
+  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
+  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
+  (*@ $[ - h3: (L \land C) \land L ]$ @*)
+  (*@ $[ - h4: L \land C ]$ @*)
+  (*@ $[ - h5: C ]$ @*)
+exact h5
+\end{lstlisting}
+
+Level 8/8:
+\begin{lstlisting}
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*) and_left (1)
+have h1 := and_left h
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+have h2 := and_left h1
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+have h3 := and_right h1
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+  (*@ $[ - h3: A ]$ @*)
+have h4 := and_right h
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+  (*@ $[ - h3: A ]$ @*)
+  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+have h5 := and_right h4
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+  (*@ $[ - h3: A ]$ @*)
+  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
+have h6 := and_left h5
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+  (*@ $[ - h3: A ]$ @*)
+  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h6: C \land \neg O ]$ @*)
+have h7 := and_left h6
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+  (*@ $[ - h3: A ]$ @*)
+  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h6: C \land \neg O ]$ @*)
+  (*@ $[ - h7: C ]$ @*)
+have h8 := and_left h2
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*)
+  (*@ $[ - h2: P \land S ]$ @*)
+  (*@ $[ - h3: A ]$ @*)
+  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h6: C \land \neg O ]$ @*)
+  (*@ $[ - h7: C ]$ @*)
+  (*@ $[ - h8: P ]$ @*)
+have h9 := and_right h2
+Assumptions:
+  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
+  (*@ $[ - h1: (P \land S) \land A ]$ @*) 
+  (*@ $[ - h2: P \land S ]$ @*) 
+  (*@ $[ - h3: A ]$ @*) 
+  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*) 
+  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*) 
+  (*@ $[ - h6: C \land \neg O ]$ @*) 
+  (*@ $[ - h7: C ]$ @*)
+  (*@ $[ - h8: P ]$ @*)
+  (*@ $[ - h9: S ]$ @*)
+exact and_intro h3 (and_intro h7 (and_intro h8 h9))
+\end{lstlisting}
+
+level 8/8 in Mathematical Logic
+\[
+\begin{aligned}
+    (1) &\quad ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U & \text{assumption} \\
+    (2) &\quad (P \land S) \land A & \text{and\_left (1)} \\
+    (3) &\quad P \land S & \text{and\_left (2)} \\
+    (4) &\quad A & \text{and\_right (2)} \\
+    (5) &\quad \neg I \land (C \land \neg O) \land \neg U & \text{and\_right (1)} \\
+    (6) &\quad (C \land \neg O) \land \neg U & \text{and\_right (5)} \\
+    (7) &\quad C \land \neg O & \text{and\_left (6)} \\
+    (8) &\quad C & \text{and\_left (7)} \\
+    (9) &\quad P & \text{and\_left (3)} \\
+    (10) &\quad S & \text{and\_right (3)} \\
+\end{aligned}
+\]
+
+\subsubsection*{Comments and Questions}
+
+Following our exposure to proving the new theorem regarding "AND" in Lean, I took note of the recursive nature of this course. Specifically, how all topics in this course build up on each other. This lead me to asking the question: How does recursion play into isomorphism and is the scalability of recursive functions a necessity for theorems and logic within programming?
 
 \section{Lessons from the Assignments}
 
