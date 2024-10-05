@@ -546,6 +546,102 @@ level 8/8 in Mathematical Logic
 
 Following our exposure to proving the new theorem regarding "AND" in Lean, I took note of the recursive nature of this course. Specifically, how all topics in this course build up on each other. This lead me to asking the question: How does recursion play into isomorphism and is the scalability of recursive functions a necessity for theorems and logic within programming?
 
+
+\subsection{Week 6}
+
+\subsubsection*{Notes}
+
+Implication is actually just a function that has to be proved through theorems and proofs rather than just visual confirmation.
+
+Precedence: An integral part of programming languages, decides the order of operations in a mathematical problem. This is important as it can change the outcome of a problem if not done correctly.
+
+\begin{itemize}
+  \item Appraisal: Processed left-to-right
+  \item $\lambda$ Abstraction: Processed right-to-left
+\end{itemize}
+
+\subsubsection*{Homework}
+
+Level 1/9:
+\begin{lstlisting}
+Assumptions:
+(*@ $ - bakery\_service: P \to C $ @*)
+exact bakery_service p
+\end{lstlisting}
+
+Level 2/9:
+\begin{lstlisting}
+(*@ $ have h_1 : C \to C := fun c : C => c $ @*)
+Assumptions:
+(*@ $   - h_1 : C \to C $ @*)
+exact h_1
+\end{lstlisting}
+
+Level 3/9:
+\begin{lstlisting}
+Objects:
+  - I S : Prop
+Goal:
+(*@ $   - I \land S \to S \land I $ @*)
+(*@ $ exact \lambda h : I \land S \to and_intro (and\_right h) h.left $ @*)
+\end{lstlisting}
+
+Level 4/9:
+\begin{lstlisting}
+Assumptions:
+(*@ $   - h1 : C \to A $ @*)
+(*@ $   - h2 : A \to S $ @*)
+(*@ $ exact h1 \gg h2 $ @*)
+\end{lstlisting}
+
+Level 5/9:
+\begin{lstlisting}
+Assumptions:
+  - p : P
+(*@ $ - h1 : P \to Q $ @*)
+(*@ $ - h2 : Q \to R $ @*)
+(*@ $ - h3 : Q \to T $ @*)
+(*@ $ - h4 : S \to T $ @*)
+(*@ $ - h5 : T \to U $ @*)
+(*@ $ exact (h1 \gg h3 \gg h5) p $ @*)
+\end{lstlisting}
+
+Level 6/9:
+\begin{lstlisting}
+Assumptions:
+(*@ $   - h : C \land D \to S $ @*)
+(*@ $ exact fun c => fun d => h \langle c,d \rangle $ @*)
+\end{lstlisting}
+
+Level 7/9:
+\begin{lstlisting}
+Assumptions:
+(*@ $   - h : C \to D \to S $ @*)
+(*@ $   exact fun \langle c, d \rangle => h c d $ @*)
+\end{lstlisting}
+
+Level 8/9:
+\begin{lstlisting}
+Assumptions:
+(*@ $    - (S \to C) \land (S \to D) $ @*)
+(*@ $  exact fun s => \langle h.1 s, h.2 s \rangle $ @*)
+\end{lstlisting}
+
+Level 9/9:
+\begin{lstlisting}
+Objects:
+  - R S : Prop
+Goal:
+(*@ $   - R \to (S \to R) \land (\neg S \to R) $ @*)
+(*@ $ exact fun r => \langle fun => r, fun => r \rangle $ @*)
+\end{lstlisting}
+
+\subsubsection*{Comments and Questions}
+
+Although closing laptops allows for better lecture retention, it heavily damages the ability to take notes, decreasing the value of the report's "notes" subsection.
+
+In class, we commonly hear the term "context-free grammar", is it not the case where all grammar within computers should be context free considering it is the foundation for mathematics which always operates the same? What are some examples of grammar that is context specific?
+
 \section{Lessons from the Assignments}
 
 (Delete and Replace): Write three pages about your individual contributions to the project.
