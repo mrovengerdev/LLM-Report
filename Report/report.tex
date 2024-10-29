@@ -13,6 +13,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{textalpha}
   \hypersetup{
     colorlinks = true,
     urlcolor = blue,       % color of external links using \href
@@ -597,7 +598,7 @@ Assumptions:
 Level 5/9:
 \begin{lstlisting}
 Assumptions:
-  - p : P
+  -p : P
 (*@ $ - h1 : P \to Q $ @*)
 (*@ $ - h2 : Q \to R $ @*)
 (*@ $ - h3 : Q \to T $ @*)
@@ -641,6 +642,180 @@ Goal:
 Although closing laptops allows for better lecture retention, it heavily damages the ability to take notes, decreasing the value of the report's "notes" subsection.
 
 In class, we commonly hear the term "context-free grammar", is it not the case where all grammar within computers should be context free considering it is the foundation for mathematics which always operates the same? What are some examples of grammar that is context specific?
+
+\subsection{Week 7}
+
+\subsubsection*{Notes}
+$\lambda$-calc: Useful helpers
+
+\begin{enumerate}
+  \item Projects: \\
+    - (1a) Take 2 args \& return 1st lambax.lambday.x (lambdax.lambday.y)\\ 
+    - (2a) 
+  \item Erase: Take 3 args \& return 1st \& 3rd: lambdax.lambday.lambdaz.xz
+  \item Duplicate: take 1 arg \& duplicate lambdax.xx
+\end{enumerate}
+
+How to encode logic in $\lambda$-calc:
+\begin{enumerate}
+  \item Specifications: \\
+        - if-then-else true M N = M \\
+        - if-then-else false M N = N \\
+        - true := $\lambda$x.$\lambda$y.x \\
+        - false := $\lambda$x.$\lambda$y.y \\
+  \item Not: \\
+        - not true = false \\
+        - not false = true \\
+        - not M = if-then-else M false true \\
+        - not := $\lambda$x.x false true \\
+\end{enumerate}
+
+\subsubsection*{Homework}
+
+\subsubsection*{Comments and Questions}
+
+Lambda calculus seems to be extremely low level and be the defining foundation for a lot of programming calculations. With this said, how is it not its own programming language that is in use today for the sake of the fastest possible runtime, sort of similar to how assembly is the bare bones equivalent of programming.
+
+\subsection{Week 8/9}
+
+\subsubsection*{Notes}
+
+Extensions of lambda calculus \\ 
+- Basic logic: boolean logic, if-construct \\
+- Basic arithmetic (numerals, add, exp,...) \\
+Want: \\ 
+- let l = local (names)s \\
+- recursion
+
+Introduce let:
+Example from VSCode: \\
+- let plus = $\lambda m . \lambda n.xf.\lambda x. m f(u f x)$ \\
+  in let two = $\lambda f.\lambda x.f(fx)$ \\
+  in let one = $\lambda f.\lambda x.fx$ \\
+  in plus one two
+
+Concrete syntax: let x = e, in ez \\
+Goal: define this $\lambda$-calc (Church encoding)  but can also add this as syntectic sugar. \\
+$\text{add to CFG: } c \rightarrow c \rightarrow \text{let id = e in e}$ \\
+abstract syntax:
+
+Y-combinator
+
+$Y := fix := \lambda f.(\lambda x.f(xx))(\lambda x.f(xx))$
+
+Claim: (fix F) is an fp of F, ie, F  $\rightarrow$ F (fix F). \\
+Proof: fixF $\rightarrow (\lambda x. F (xx)) (\lambda x.F(xx))$
+
+\subsubsection*{Homework}
+
+Exercise 2: \\
+- a b c d $\rightarrow$ (((a b) c) d) \\
+  - This is because the grammar identifies that there are no parentheses and thus seeks to establish the order of operations. \\
+- (a) $\rightarrow$ a \\
+  - This is because the grammar identifies that there are parentheses and then seeks to simplify the equation. \\
+
+Exercise 3: \\
+  - Capture-avoiding substitution works by ensuring that when substituting a variable  x  in an expression, no free variables get mistakenly bound by a new scope. If a substitution would result in a name conflict (i.e.,  x  being replaced in a context where it is already bound), an α-conversion (renaming of bound variables) is performed to avoid variable capture.
+
+\begin{lstlisting}
+assert substitute(('lam', 'x', ('lam', 'y', ('var', 'x'), ('var', 'y'))), 'y', ('var', 'x')) == ('lam', 'x', ('lam', 'Var1', ('var', 'x'), ('var', 'Var1')))
+print(f"SUBST {MAGENTA}(\\x.\\y.x y) [y/x]{RESET} == ('lam', 'x', ('lam', 'Var1', ('var', 'x'), ('var', 'Var1')))")
+
+print("\nCapture-Avoiding Substitution: Test passed!\n")
+
+print("\nevaluate(): All tests passed!\n")
+\end{lstlisting}
+
+  - Implemented by: \\
+  1.	Base case: If the term is a variable and matches the one being substituted, replace it with the expression. \\
+  2.	Lambda abstraction: When encountering a lambda abstraction  $\lambda y. e$ , check if the bound variable  $y$  conflicts with  $x$ . If so, rename  $y$  to a fresh variable before substituting. \\
+  3.	Recursion: Perform the substitution recursively in the body of the lambda or function application, applying $\alpha$-conversion where necessary to avoid capture. \\
+
+Exercise 4:
+- When dealing with capture avoiding substitution, the expected result is not always returned. This is caused by events where there is a scope change that is unanticipated which results in an unexpected outcome.
+- Not all computations return to normal form since there are computations that have forms where no reductions can occur.
+  
+Exercise 5:
+  - The smallest $\lambda$-expression that does not reduce to normal form is an omega combinator. \\ 
+    - $\omega = \lambda x.xx$ 
+
+Exercise 6:
+  - Used debugger
+
+Exercise 7:
+  \newcommand{\m}{\text{m}}
+  \newcommand{\n}{\text{n}}
+  \newcommand{\f}{\text{f}}
+  \newcommand{\x}{\text{x}}
+  \newcommand{\Var}{\text{Var}}
+
+  - ((\m.\n. \m \n) (\f.\x. \f (\f \x))) (\f.\x. \f (\f (\f \x))) \\ 
+  - Gets interpreted to \\ 
+  - (\Var5.((\f.(\x.(f (f (f x))))) ((\f.(\x.(f (f (f x))))) Var5)))
+
+Exercise 8:
+\begin{verbatim}
+12: eval (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f x))))
+    39: eval ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+        25: eval (\f.(\x.(f (f x))))
+        19: eval (\f.(\x.(f x)))
+    51: substitute ((\m.(\n.(m n))), (\f.(\x.(f (f x)))), m)
+        45: eval ((\f.(\x.(f (f x)))) (\f.(\x.(f x))))
+            29: eval (\f.(\x.(f x)))
+            55: substitute ((\f.(\x.(f (f x)))), (\f.(\x.(f x))), f)
+                38: eval (\x.(f (f x)))
+                    40: substitute ((\x.(f (f x))), x, x)
+                        22: eval (f (f x))
+                            14: eval (f x)
+\end{verbatim}
+
+\subsubsection*{Comments and Questions}
+
+Throughout the course, we've explored countless algorithms and evalutations that work recursively. What makes it so difficult to revert any expression, that has been evaluated using a recursive algortithm, back to its original state?
+
+In the course, we've seen that lambda expressions can be reduced into normal form, what exactly is the benefit of having theses expressions displayed in normal form?
+
+\subsection{Week 10}
+
+\subsubsection*{Notes}
+
+2n $\rightarrow$ n/2 \\
+2n+1 $\rightarrow$ 3n+1 \\
+
+c(n) := { \\
+  - n/2 n even \\
+  - 3n+1 n odd \\
+  }
+
+Conjecture: stabilizes at 1, no matter the initial n.
+
+Rewriting:
+
+Purpose:
+Formalism, to capture and analyze the process of transforming syntax (aka strings).
+
+Examples: \\
+\begin{itemize}
+  \item High school algebra
+  \item CFGs
+  \item Turing machines
+  \item D/NFA
+  \item MIU save
+  \item Cellular Automata
+\end{itemize}
+
+Definition: an abstract rewrite (or reduction) system ARS is a pair (A, R) with: \\
+\begin{itemize}
+  \item A: set of expressions
+  \item R: set of rewrite rules
+  \item R <= A x A a binary relation on A
+\end{itemize}
+
+\subsubsection*{Homework}
+
+\subsubsection*{Comments and Questions}
+
+Although Langton's Ant has an emergent behavior, is it not the case where when we can visually confirm that the behavior occurs everytime, be enough justification for us to be able to prove that it is true in all scenarios? Aren't observations the root of all discoveries?
 
 \section{Lessons from the Assignments}
 
