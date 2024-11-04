@@ -771,7 +771,7 @@ Exercise 8:
 
 \subsubsection*{Comments and Questions}
 
-Throughout the course, we've explored countless algorithms and evalutations that work recursively. What makes it so difficult to revert any expression, that has been evaluated using a recursive algortithm, back to its original state?
+Throughout the course, we've explored countless algorithms and calculations that work recursively. What makes it so difficult to revert any expression, that has been evaluated using a recursive algorithm, back to its original state?
 
 In the course, we've seen that lambda expressions can be reduced into normal form, what exactly is the benefit of having theses expressions displayed in normal form?
 
@@ -811,11 +811,27 @@ Definition: an abstract rewrite (or reduction) system ARS is a pair (A, R) with:
   \item R <= A x A a binary relation on A
 \end{itemize}
 
+Computational behavior: \\
+- Confluence and Termination
 \subsubsection*{Homework}
+
+1) What did you find most challenging when working through Homework 8/9 and Assignment 3?
+
+When working on Homework 8/9 and Assignment 3, I found it very challenging to both understand and make adjustments to the existing repo which we used for the evaluations.
+It slowed down my progress by a considerable amount as I had to spend a lot of time understanding the codebase before I could make any changes to it.
+After finally gaining understanding, I was able to make progress with the exercises and try out the debugger.
+
+2) How did you come up with the key insight for Assignment 3?
+
+I came up with the key insight for Assignment 3 by first understanding the problem and then breaking it down into smaller parts. This process was also enforced by the debugger as it provides the same style of problems solving where we can transform the program into bits and pieces by using the debugger's break points.
+
+3) What is your most interesting takeaway from Homework 8/9 and Assignment 3?
+
+The most interesting takeaway from both assignments, personally, was the fact that the smallest lambda expression that does not reduce to normal form is an omega combinator. This was interesting to me as it showed that not all computations can return to normal form which further supports the format in computation where there are exceptions for almost all rules.
 
 \subsubsection*{Comments and Questions}
 
-Although Langton's Ant has an emergent behavior, is it not the case where when we can visually confirm that the behavior occurs everytime, be enough justification for us to be able to prove that it is true in all scenarios? Aren't observations the root of all discoveries?
+Although Langton's Ant has an emergent behavior, is it not the case where when we can visually confirm that the behavior occurs everytime, are we not able to just test the extremes and then be able to verify that this emergent behavior is just its normal behavior and true in all scenarios?
 
 \section{Lessons from the Assignments}
 
