@@ -13,6 +13,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{tikz-cd}
 \usepackage{textalpha}
   \hypersetup{
     colorlinks = true,
@@ -832,6 +833,135 @@ The most interesting takeaway from both assignments, personally, was the fact th
 \subsubsection*{Comments and Questions}
 
 Although Langton's Ant has an emergent behavior, is it not the case where when we can visually confirm that the behavior occurs everytime, are we not able to just test the extremes and then be able to verify that this emergent behavior is just its normal behavior and true in all scenarios?
+
+\subsection{Week 11}
+
+\subsubsection*{Notes}
+
+(2) Terminating if: does ntot admit an infinite computation (a1,a2,a3,...) also called; strictly normalizing.
+
+(3) (weakly) normalizing if every element has some normal form.
+
+Application: Termination analysis of programs $\rightarrow$ undecidable in general, but can analyze/classify using rewriting theory.
+
+Confluent: If there is no diamond shape in the diagram, it is not confluent.
+
+Unique NF: If we ask if there is a unique normal form, we're asking if all elements have at least one unique normal form.
+
+Properties of ARS: Termination, Normalization, Confluence
+
+ARS: $ba \rightarrow ab$ \\
+- Is it terminating? (No infinite set)
+
+We can tell that it is terminating if there is a decrease of length in the generating rules.
+
+Not every computation terminates: (a,a,a,a,...)
+
+Termination does imply noramlization.
+
+\subsubsection*{Homework}
+
+\subsection*{1. \( A = \emptyset \) and \( R = \emptyset \)}
+\begin{itemize}
+  \item \textbf{Terminating}: Yes, trivially terminating because there are no elements or relations.
+  \item \textbf{Confluent}: Yes, trivially confluent.
+  \item \textbf{Unique Normal Forms}: Yes, trivially has unique normal forms because there are no elements or rewrites.
+\end{itemize}
+
+\subsection*{2. \( A = \{a\} \) and \( R = \emptyset \)}
+\begin{itemize}
+  \item \textbf{Terminating}: Yes, trivially terminating because there are no relations to rewrite \( a \).
+  \item \textbf{Confluent}: Yes, trivially confluent.
+  \item \textbf{Unique Normal Forms}: Yes, \( a \) is its own normal form since there are no rewrites.
+\end{itemize}
+
+\subsection*{3. \( A = \{a\} \) and \( R = \{(a, a)\} \)}
+\begin{itemize}
+  \item \textbf{Terminating}: No, \( a \to a \) is a loop, so there is an infinite rewrite sequence.
+  \item \textbf{Confluent}: Yes, trivially confluent because there is only one element with a single rewriting path.
+  \item \textbf{Unique Normal Forms}: No, there is no unique normal form since \( a \) can be rewritten infinitely to itself.
+\end{itemize}
+
+\subsection*{4. \( A = \{a, b, c\} \) and \( R = \{(a, b), (a, c)\} \)}
+\begin{itemize}
+  \item \textbf{Terminating}: Yes, terminating because each element can be rewritten only a finite number of times.
+  \item \textbf{Confluent}: No, not confluent because \( a \) can be rewritten to either \( b \) or \( c \), leading to different results.
+  \item \textbf{Unique Normal Forms}: No, there is no unique normal form as \( a \) can reach either \( b \) or \( c \).
+\end{itemize}
+
+\subsection*{5. \( A = \{a, b\} \) and \( R = \{(a, a), (a, b)\} \)}
+\begin{itemize}
+  \item \textbf{Terminating}: No, because \( a \to a \) creates an infinite loop.
+  \item \textbf{Confluent}: Yes, trivially confluent as there are only two elements and no branching rewrites.
+  \item \textbf{Unique Normal Forms}: No, \( a \) does not have a unique normal form due to the loop.
+\end{itemize}
+
+\subsection*{6. \( A = \{a, b, c\} \) and \( R = \{(a, b), (b, b), (a, c)\} \)}
+\begin{itemize}
+  \item \textbf{Terminating}: No, because \( b \to b \) is a loop, allowing infinite rewrites.
+  \item \textbf{Confluent}: No, not confluent because \( a \) can rewrite to either \( b \) or \( c \), leading to different results.
+  \item \textbf{Unique Normal Forms}: No, since \( a \) can reach different results (either \( b \) or \( c \)).
+\end{itemize}
+
+\subsection*{7. \( A = \{a, b, c\} \) and \( R = \{(a, b), (b, b), (a, c), (c, c)\} \)}
+\begin{itemize}
+  \item \textbf{Terminating}: No, both \( b \to b \) and \( c \to c \) create loops.
+  \item \textbf{Confluent}: No, not confluent because \( a \) can rewrite to either \( b \) or \( c \), leading to different results.
+  \item \textbf{Unique Normal Forms}: No, since \( a \) can reach different results (either \( b \) or \( c \)).
+\end{itemize}
+
+\subsubsection*{Images for the above ARSs}
+
+\begin{enumerate}
+  \item Confluent: True. Terminating: True. Has unique normal forms: True.
+  \item Confluent: True. Terminating: True. Has unique normal forms: False.
+  \item Confluent: True. Terminating: False. Has unique normal forms: True.
+  \item Confluent: True. Terminating: False. Has unique normal forms: False.
+  \item Confluent: False. Terminating: True. Has unique normal forms: True.
+  \item Confluent: False. Terminating: True. Has unique normal forms: False.
+  \item Confluent: False. Terminating: False. Has unique normal forms: True.
+  \item Confluent: False. Terminating: False. Has unique normal forms: False.
+\end{enumerate}
+
+% https://q.uiver.app/#q=WzAsNDQsWzAsMCwiMS4iXSxbMSwwLCJBIl0sWzIsMCwiQiJdLFswLDEsIjIuIl0sWzEsMSwiQSBcXGRvd25hcnJvdyJdLFsyLDEsIkIiXSxbMywxLCJBIl0sWzQsMSwiQyJdLFswLDIsIjMuIl0sWzEsMiwiQSJdLFsyLDIsIkIiXSxbMywyLCJBIl0sWzQsMiwiQyJdLFs1LDIsIkIiXSxbNiwyLCJEIl0sWzcsMiwiQyJdLFs4LDIsIkQiXSxbMCwzLCI0LiJdLFsxLDMsIkEiXSxbMiwzLCJCIl0sWzMsMywiQSJdLFs0LDMsIkMiXSxbMCw0LCI1LiJdLFsxLDQsIkEiXSxbMiw0LCJBIFxcZG93bmFycm93Il0sWzAsNSwiNi4iXSxbMCw2LCI3LiJdLFswLDcsIjguIl0sWzEsNSwiQSJdLFsyLDUsIkEiXSxbMyw1LCJBIl0sWzQsNSwiQiJdLFsxLDYsIkEiXSxbMiw2LCJBIFxcZG93bmFycm93Il0sWzMsNiwiQSJdLFs0LDYsIkIiXSxbMSw3LCJBIl0sWzIsNywiQiJdLFszLDcsIkIiXSxbNCw3LCJCIl0sWzUsNywiQSJdLFs2LDcsIkMiXSxbNyw3LCJDIl0sWzgsNywiQyJdLFsxLDIsIioiXSxbNCw1LCIqIl0sWzYsNywiKiJdLFs5LDEwXSxbMTEsMTJdLFsxMywxNCwiKiJdLFsxNSwxNiwiKiJdLFsxOCwxOSwiKiJdLFsyMCwyMSwiKiJdLFsyMywyNF0sWzI4LDI5XSxbMzAsMzEsIioiXSxbMzQsMzUsIioiXSxbMzYsMzcsIioiXSxbMzgsMzldLFs0MCw0MSwiKiJdLFs0Miw0M10sWzMyLDMzXSxbMjMsMjNdLFsyOCwyOF0sWzMyLDMyXSxbMzgsMzhdLFs0Miw0Ml1d
+
+\[\begin{tikzcd}[cramped]
+	{1.} & A & B \\
+	{2.} & {A \downarrow} & B & A & C \\
+	{3.} & A & B & A & C & B & D & C & D \\
+	{4.} & A & B & A & C \\
+	{5.} & A & {A \downarrow} \\
+	{6.} & A & A & A & B \\
+	{7.} & A & {A \downarrow} & A & B \\
+	{8.} & A & B & B & B & A & C & C & C
+	\arrow["{*}", from=1-2, to=1-3]
+	\arrow["{*}", from=2-2, to=2-3]
+	\arrow["{*}", from=2-4, to=2-5]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow["{*}", from=3-6, to=3-7]
+	\arrow["{*}", from=3-8, to=3-9]
+	\arrow["{*}", from=4-2, to=4-3]
+	\arrow["{*}", from=4-4, to=4-5]
+	\arrow[from=5-2, to=5-2, loop, in=55, out=125, distance=10mm]
+	\arrow[from=5-2, to=5-3]
+	\arrow[from=6-2, to=6-2, loop, in=55, out=125, distance=10mm]
+	\arrow[from=6-2, to=6-3]
+	\arrow["{*}", from=6-4, to=6-5]
+	\arrow[from=7-2, to=7-2, loop, in=55, out=125, distance=10mm]
+	\arrow[from=7-2, to=7-3]
+	\arrow["{*}", from=7-4, to=7-5]
+	\arrow["{*}", from=8-2, to=8-3]
+	\arrow[from=8-4, to=8-4, loop, in=55, out=125, distance=10mm]
+	\arrow[from=8-4, to=8-5]
+	\arrow["{*}", from=8-6, to=8-7]
+	\arrow[from=8-8, to=8-8, loop, in=55, out=125, distance=10mm]
+	\arrow[from=8-8, to=8-9]
+\end{tikzcd}\]
+
+\subsubsection*{Comments and Questions}
+
+After working with ARSs for this week, are we able to implement any recursive functions that have the ability to solve all of problems that we have encountered so far or are there too many exceptions for that to be the case?
 
 \section{Lessons from the Assignments}
 
