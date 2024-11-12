@@ -963,6 +963,95 @@ Termination does imply noramlization.
 
 After working with ARSs for this week, are we able to implement any recursive functions that have the ability to solve all of problems that we have encountered so far or are there too many exceptions for that to be the case?
 
+\subsection{Week 12}
+
+\subsubsection*{Notes}
+
+
+
+\subsubsection*{Homework}
+
+Exercise 1:
+
+$ab \rightarrow ba$
+\begin{itemize}
+  \item The ARS terminates because once all "ab"s are converted into "ba", they can't be converted back, and thus the algorithm terminates.
+  \item "ab" becomes "ba" or "abab" becomes "baba"
+  \item The ARS is confluent because for any input, regardless of which "ab" is chosen to be converted to "ba", we end up with a single, predictable normal form which provides a unique result.
+  \item The ARS implements a sorting specification.
+\end{itemize}
+
+Exercise 2:
+
+$aa \rightarrow a$ \\
+$bb \rightarrow a$ \\
+$ab \rightarrow b$ \\
+$ba \rightarrow b$ \\
+\begin{itemize}
+  \item This ARS terminates because the rules reduce the length of the string which will eventually reach a normal form.
+  \item The normal forms are either "a" or "b" since it depends entirely on the original input string.
+  \item There is no string that can reduce to both "a" and "b".
+  \item The ARS is not confluent since any input will result in either "a" or "b" as the normal form which means that they do not have unique result.
+  \item Strings that share the same final normal form would become equal.
+  \item A string is equivalent to a if it contains an even number of "b"s, or it is equivalent to be if it contains an odd number of "b"s.
+  \item Create a counter for the number of "b"s in the string. If the result of mod 2 to the counter is 0, it is even, and thus "a". However, if the counter is 1, it is odd and the result is "b".
+  \item This algorithm implements a parity checker for the number of "b"s in the string.
+\end{itemize}
+
+Exercise 3:
+
+$aa \rightarrow a$ \\
+$bb \rightarrow a$ \\
+$ba \rightarrow ba$ \\
+$ab \rightarrow ab$ \\
+\begin{itemize}
+  \item This ARS does not terminate since any input "ab" or "ba" will infinitely loop between the two states since they can be converted back and forth.
+  \item Strings that don't contain "ab" or "ba" will have a normal form of "a" or "b". However, strings that include "ab" or "ba" will be forced to cycle between the two and not have a normal form.
+  \item Remove the rules $ab \rightarrow ab$ and $ba \rightarrow ba$ and keep the other two.
+  \item The specification implemented is simplification of strings based on indempotence.
+\end{itemize}
+
+Exercise 4:
+
+$ab \rightarrow ba$ \\
+$ba \rightarrow ab$ \\
+\begin{itemize}
+  \item This ARS does not terminate since the rewrite rules only support an infinite cycle/loop.
+  \item There are no normal forms since the strings will infinitely cycle between "ab" and "ba".
+  \item $aa \rightarrow a$ $bb \rightarrow a$ $ba \rightarrow ba$ $ab \rightarrow ab$
+  \item The specification implemented is dominance check.
+\end{itemize}
+
+Exercise 5:
+
+$ab \rightarrow ba$ \\
+$ba \rightarrow ab$ \\
+$aa \rightarrow$ \\
+$b \rightarrow$ \\
+\begin{itemize}
+  \item $abba \rightarrow aa \rightarrow $ \\ $bababa \rightarrow aaa \rightarrow a$
+  \item The ARS is not terminating because when the ARS is caught in the cycle, it will never use the third or fourth rule, causing an infinite cycle with no termination.
+  \item There are two classes. 1. Strings, whose counter of "a" mod 2 = 0, that are reduced to an empty string with a normal form of "". 2. Strings, whose counter of "a" mod 2 = 1, that are reduced to a normal form of "a".
+  \item Remove the first two rules which breaks the infinite loop. This maintains the same parity and ensures that the same normal form outputs are maintained.
+  \item 1. Does this string reduce to an empty string? 2. Does this string reduce to an "a"?
+\end{itemize}
+
+Exercise 5b:
+
+$ab \rightarrow ba$ \\
+$ba \rightarrow ab$ \\
+$aa \rightarrow a$ \\
+$b \rightarrow$ \\
+\begin{itemize}
+  \item $abba \rightarrow aa \rightarrow a$ \\ $bababa \rightarrow aaa \rightarrow aa \rightarrow a$
+  \item The ARS is not terminating because when the ARS is caught in the cycle, it will never use the third or fourth rule, causing an infinite cycle with no termination.
+  \item There are two classes. 1. Strings, that contain no "a"s, that are reduced to an empty string with a normal form of "". 2. Strings, that contain any number of "a"s, that are reduced to a normal form of "a".
+  \item Remove the first two rules which breaks the infinite loop. This maintains the same parity and ensures that the same normal form outputs are maintained.
+  \item 1. Does this string reduce to an empty string? 2. Does this string reduce to an "a"?
+\end{itemize}
+
+\subsubsection*{Comments and Questions}
+
 \section{Lessons from the Assignments}
 
 (Delete and Replace): Write three pages about your individual contributions to the project.
