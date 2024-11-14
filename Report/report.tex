@@ -967,7 +967,24 @@ After working with ARSs for this week, are we able to implement any recursive fu
 
 \subsubsection*{Notes}
 
+Properties of ARS
+\begin{enumerate}
+  \item Terminating: No infinite computations.
+  \item Confluence: No diamond shapes which follows the diamond property.
+  \item Unique normal form: Every x has a unique normal form. Meaning, there exists a unique normal form for every element.
+  \item Normalizing: Every element has a normal form. Not necessarily uniquely.
+\end{enumerate}
 
+Example:
+\begin{itemize}
+  \item Bubble sort (ba $\rightarrow$ ab)
+  \item Calculator: evaluator for context free grammar of arithmetic
+  \item $\lambda$-calculus, Beta-reduction
+\end{itemize}
+
+Church-Rosser property: If $y \overset{*}{\longleftrightarrow} z => y \downarrow z$
+
+Confluence: $y \overset{*}{\leftarrow} x \overset{*}{\rightarrow} z => y \downarrow z$
 
 \subsubsection*{Homework}
 
@@ -1051,6 +1068,8 @@ $b \rightarrow$ \\
 \end{itemize}
 
 \subsubsection*{Comments and Questions}
+
+When dealing with the normalization of ARSs, is it possible to prevent infinite loops through a designating the order in which rules must be applied or the number of times a rule can be applied?
 
 \section{Lessons from the Assignments}
 
