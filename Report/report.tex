@@ -1071,6 +1071,60 @@ $b \rightarrow$ \\
 
 When dealing with the normalization of ARSs, is it possible to prevent infinite loops through a designating the order in which rules must be applied or the number of times a rule can be applied?
 
+\subsection{Week 13}
+
+\subsubsection*{Notes}
+
+There is a riddle where 10 people with hats, either black or white, are staring in the same direction.
+This means that the person in the back can see the 9 people in front of them, the person in the 9th position can see the 8 people in front of them, and so on.
+A person can only guess one color and make no other means of communication.
+One mistake is allowed.
+
+The solution is to have a person say "white", if there is an even number of white hats in front of them. Furthermore, if there is an odd number of white hats, they should say "black".
+
+With the addition of the new grammar lark rules in milestone 2, we can begin to see the foundations of a programming language.
+
+\subsubsection*{Homework}
+
+\[
+\begin{aligned}
+1. & \quad \text{let rec } \text{fact} = \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1) \text{ in fact } 3 \\
+   & \to \text{(definition of let rec)} \\
+2. & \quad \text{let } \text{fact} = (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) \text{ in fact } 3 \\
+   & \to \text{(definition of let)} \\
+3. & \quad (\lambda \text{fact}.\ \text{fact } 3) (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) \\
+   & \to \text{(beta reduction: substitute } \text{fact}) \\
+4. & \quad (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)))\ 3 \\
+   & \to \text{(definition of fix)} \\
+5. & \quad (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)) (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)))\ 3 \\
+   & \to \text{(beta reduction: substitute } \text{fact}) \\
+6. & \quad (\lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) (n-1))\ 3 \\
+   & \to \text{(beta reduction: substitute } n) \\
+7. & \quad \text{if } 3=0 \text{ then } 1 \text{ else } 3 * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) (3-1) \\
+   & \to \text{(evaluate } \text{if)} \\
+8. & \quad 3 * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)))\ (3-1) \\
+   & \to \text{(arithmetic: } 3-1) \\
+9. & \quad 3 * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)))\ 2 \\
+   & \to \text{(definition of fix)} \\
+10. & \quad 3 * ((\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)) (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))))\ 2 \\
+    & \to \text{(beta reduction: substitute } \text{fact}) \\
+11. & \quad 3 * (\lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) (n-1))\ 2 \\
+    & \to \text{(beta reduction: substitute } n) \\
+12. & \quad 3 * (\text{if } 2=0 \text{ then } 1 \text{ else } 2 * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) (2-1)) \\
+    & \to \text{(evaluate } \text{if)} \\
+13. & \quad 3 * (2 * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1))) (2-1)) \\
+    & \to \text{(arithmetic: } 2-1) \\
+14. & \quad 3 * (2 * (\text{fix } (\lambda \text{fact}.\ \lambda n.\ \text{if } n=0 \text{ then } 1 \text{ else } n * \text{fact} (n-1)))\ 1) \\
+    & \to \text{(repeat steps for } n=1 \text{ and } n=0 \text{ as above)} \\
+    & \to \text{(final arithmetic)} \\
+15. & \quad 3 * (2 * 1) = 6
+\end{aligned}
+\]
+
+\subsubsection*{Comments and Questions}
+
+Are there any forms of recursion that we can apply towards the hat riddle that would make it simpler to solve? Even accounting for the event where there are multiple colors?
+
 \section{Lessons from the Assignments}
 
 (Delete and Replace): Write three pages about your individual contributions to the project.
