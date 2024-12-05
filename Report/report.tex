@@ -201,103 +201,117 @@ Regarding the allowing of typos in coding, code should be non-ambigious because 
 Lean contains tactics, Ex: rw, and theorems, Ex: one\_eq\_succ\_zero. Tactics are commands while theorems are logical propositions.
 
 \subsubsection*{Homework}
+
 Level 1/5:
-\begin{lstlisting}
-0 + n = n
-induction n with d hd
-0 + 0 = 0
-rw[add_zero]
-0 = 0
-rfl
-0 + succ d = succ d
-rw[add_succ]
-succ (0 + d) = succ d
-rw[hd]
-succ d = succ d
-rfl
-\end{lstlisting}
+\[
+\begin{aligned}
+&0 + n = n \\
+&\text{induction } n \text{ with } d, \text{ hd} \\
+&0 + 0 = 0 \\
+&\text{rw}[\text{add\_zero}] \\
+&0 = 0 \\
+&\text{rfl} \\
+&0 + \text{succ } d = \text{succ } d \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (0 + d) = \text{succ } d \\
+&\text{rw}[\text{hd}] \\
+&\text{succ } d = \text{succ } d \\
+&\text{rfl} \\
+\end{aligned}
+\]
 
 Level 2/5:
-\begin{lstlisting}
-succ a + b = succ (a + b)
-induction b with b
-succ a + 0 = succ (a + 0)
-rw[add_zero]
-succ a = succ (a + 0)
-rw[add_zero]
-succ a = succ a
-rfl
-succ a + succ b = succ (a + succ b)
-rw[add_succ]
-succ (succ a + b) = succ (a + succ b)
-rw[n_ih]
-succ (succ (a + b)) = succ (a + succ b)
-rw[add_succ]
-succ (succ (a + b)) = succ (succ (a + b))
-rfl
-\end{lstlisting}
+\[
+\begin{aligned}
+&\text{succ } a + b = \text{succ } (a + b) \\
+&\text{induction } b \text{ with } b \\
+&\text{succ } a + 0 = \text{succ } (a + 0) \\
+&\text{rw}[\text{add\_zero}] \\
+&\text{succ } a = \text{succ } (a + 0) \\
+&\text{rw}[\text{add\_zero}] \\
+&\text{succ } a = \text{succ } a \\
+&\text{rfl} \\
+&\text{succ } a + \text{succ } b = \text{succ } (a + \text{succ } b) \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (\text{succ } a + b) = \text{succ } (a + \text{succ } b) \\
+&\text{rw}[\text{n\_ih}] \\
+&\text{succ } (\text{succ } (a + b)) = \text{succ } (a + \text{succ } b) \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (\text{succ } (a + b)) = \text{succ } (\text{succ } (a + b)) \\
+&\text{rfl} \\
+\end{aligned}
+\]
 
 Level 3/5:
-\begin{lstlisting}
-a + b = b + a
-induction b with b hb
-a + 0 = 0 + a
-rw [add_zero]
-a = 0 + a
-rw [zero_add]
-a = a
-rfl
-a + succ b = succ b + a
-rw [add_succ]
-succ (a + b) = succ b + a
-rw [hb]
-succ (b + a) = succ b + a
-rw [succ_add]
-succ (b + a) = succ (b + a)
-rfl
-\end{lstlisting}
+\[
+\begin{aligned}
+&a + b = b + a \\
+&\text{induction } b \text{ with } b, \text{ hb} \\
+&a + 0 = 0 + a \\
+&\text{rw}[\text{add\_zero}] \\
+&a = 0 + a \\
+&\text{rw}[\text{zero\_add}] \\
+&a = a \\
+&\text{rfl} \\
+&a + \text{succ } b = \text{succ } b + a \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (a + b) = \text{succ } b + a \\
+&\text{rw}[\text{hb}] \\
+&\text{succ } (b + a) = \text{succ } b + a \\
+&\text{rw}[\text{succ\_add}] \\
+&\text{succ } (b + a) = \text{succ } (b + a) \\
+&\text{rfl} \\
+\end{aligned}
+\]
 
 Level 4/5:
-\begin{lstlisting}
-a + b + c = a + (b + c)
-induction c with c hc
-a + b + 0 = a + (b + 0)
-rw [add_zero]
-a + b = a + (b + 0)
-rw [add_zero]
-a + b = a + b
-rfl
-a + b + succ c = a + (b + succ c)
-rw [add_succ]
-succ (a + b + c) = a + (b + succ c)
-rw [add_succ]
-succ (a + b + c) = a + succ (b + c)
-rw [add_succ]
-succ (a + b + c) = succ (a + (b + c))
-rw [hc]
-succ (a + (b + c)) = succ (a + (b + c))
-rfl
-\end{lstlisting}
+\[
+\begin{aligned}
+&a + b + c = a + (b + c) \\
+&\text{induction } c \text{ with } c, \text{ hc} \\
+&a + b + 0 = a + (b + 0) \\
+&\text{rw}[\text{add\_zero}] \\
+&a + b = a + (b + 0) \\
+&\text{rw}[\text{add\_zero}] \\
+&a + b = a + b \\
+&\text{rfl} \\
+&a + b + \text{succ } c = a + (b + \text{succ } c) \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (a + b + c) = a + (b + \text{succ } c) \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (a + b + c) = a + \text{succ } (b + c) \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (a + b + c) = \text{succ } (a + (b + c)) \\
+&\text{rw}[\text{hc}] \\
+&\text{succ } (a + (b + c)) = \text{succ } (a + (b + c)) \\
+&\text{rfl} \\
+\end{aligned}
+\]
+
+In Level 4, the Lean proof establishes the \textit{associativity of addition} through induction. The objective is to demonstrate that  a + (b + c) = (a + b) + c . The proof starts with the \textit{base case}  c = 0 , where the Lean rule  \texttt{add\_zero}  simplifies both sides to show equality. For the \textit{inductive step}, it is assumed that the property holds for a specific  c , and the goal is to prove it for  c + 1 , the \textit{successor of }  c . Lean uses  \texttt{add\_succ}  to rewrite the expression involving the successor function, then applies the inductive hypothesis. The proof concludes by demonstrating that both sides are equal, completing the argument. This approach mirrors the structure of discrete mathematics, where the base case at 0 is proven, and the property is extended to the \textit{successor of}  c.
 
 Level 5/5:
-\begin{lstlisting}
-a + b + c = a + c + b
-induction c with c hc
-a + b + 0 = a + 0 + b
-rw [add_zero, add_zero]
-a + b = a + b
-rfl
-a + b + succ c = a + succ c + b
-rw [add_succ]
-succ (a + b + c) = a + succ c + b
-rw [add_succ]
-succ (a + b + c) = succ (a + c) + b
-rw [succ_add]
-succ (a + b + c) = succ (a + c + b)
-rw [hc]
-succ (a + c + b) = succ (a + c + b)
-rfl
-\end{lstlisting}
+\[
+\begin{aligned}
+&a + b + c = a + c + b \\
+&\text{induction } c \text{ with } c, \text{ hc} \\
+&a + b + 0 = a + 0 + b \\
+&\text{rw}[\text{add\_zero}, \text{add\_zero}] \\
+&a + b = a + b \\
+&\text{rfl} \\
+&a + b + \text{succ } c = a + \text{succ } c + b \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (a + b + c) = a + \text{succ } c + b \\
+&\text{rw}[\text{add\_succ}] \\
+&\text{succ } (a + b + c) = \text{succ } (a + c) + b \\
+&\text{rw}[\text{succ\_add}] \\
+&\text{succ } (a + b + c) = \text{succ } (a + c + b) \\
+&\text{rw}[\text{hc}] \\
+&\text{succ } (a + c + b) = \text{succ } (a + c + b) \\
+&\text{rfl} \\
+\end{aligned}
+\]
+
 \subsubsection*{Comments and Questions}
 
 Personally, I felt that when it comes to AI autocorrecting code, instead of being lenient towards mistyped code, AI could just simply correct the typos. This would allow for a smoother coding process wihle also creating non-ambigious code.
@@ -337,8 +351,7 @@ We can define well formed expressions through formal grammar. Since formal gramm
 
 \subsubsection*{Homework}
 
-\includegraphics[width=0.45\textwidth]{HW4IMG1.jpg}
-\includegraphics[width=0.45\textwidth]{HW4IMG2.jpg}
+\includegraphics[width=0.45\textwidth]{HW4IMG.png}
 
 \subsubsection*{Questions and Comments}
 
@@ -672,6 +685,65 @@ How to encode logic in $\lambda$-calc:
 \end{enumerate}
 
 \subsubsection*{Homework}
+
+\textbf{1) Reducing the lambda term:}
+
+We are given the term:
+
+\[
+((\lambda m. \lambda n. m \, n) \, (\lambda f. \lambda x. f (f \, x))) \, (\lambda f. \lambda x. f (f (f \, x)))
+\]
+
+\textbf{Step 1: Apply the first function}
+
+Apply \((\lambda m. \lambda n. m \, n)\) to \((\lambda f. \lambda x. f (f \, x))\):
+
+\[
+(\lambda m. \lambda n. m \, n) \, (\lambda f. \lambda x. f (f \, x)) = \lambda n. (\lambda f. \lambda x. f (f \, x)) \, n
+\]
+
+\[
+= \lambda n. (\lambda f. \lambda x. f (f \, x)) \, n
+\]
+
+\textbf{Step 2: Apply the second function}
+
+Now apply \(\lambda n. (\lambda f. \lambda x. f (f \, x)) \, n\) to \((\lambda f. \lambda x. f (f (f \, x)))\):
+
+\[
+(\lambda n. (\lambda f. \lambda x. f (f \, x)) \, n) \, (\lambda f. \lambda x. f (f (f \, x)))
+= (\lambda f. \lambda x. f (f \, x)) \, (\lambda f. \lambda x. f (f (f \, x)))
+\]
+
+\textbf{Step 3: Apply the inner function}
+
+Finally, apply \((\lambda f. \lambda x. f (f \, x))\) to \((\lambda f. \lambda x. f (f (f \, x)))\):
+
+\[
+(\lambda f. \lambda x. f (f \, x)) \, (\lambda f. \lambda x. f (f (f \, x))) = \lambda x. (\lambda f. \lambda x. f (f (f \, x))) (f (f \, x))
+\]
+
+This simplifies to:
+
+\[
+= \lambda x. f (f (f (f (f x))))
+\]
+
+\textbf{Final result:}
+
+The fully reduced form is:
+
+\[
+\lambda x. f (f (f (f (f x))))
+\]
+
+\textbf{2) Explanation of the function \(\lambda m. \lambda n. m \, n\):}
+
+The lambda term \(\lambda m. \lambda n. m \, n\) represents a higher-order function that takes two arguments. The first argument, \(m\), is a function, and the second argument, \(n\), is a value. The function applies \(m\) to \(n\). 
+
+In the context of natural numbers, this function can be interpreted as a basic operation of applying a function \(m\) to an argument \(n\), commonly seen in **Church encoding**. Specifically, it applies \(m\) to \(n\), where \(m\) could represent a function that operates on natural numbers encoded in the lambda calculus style, and \(n\) is the number to which \(m\) is applied.
+
+Thus, \(\lambda m. \lambda n. m \, n\) essentially represents a function that applies \(m\) to \(n\), and in the case of Church numerals, this can represent various operations on numbers, such as adding or multiplying, depending on the nature of \(m\).
 
 \subsubsection*{Comments and Questions}
 
