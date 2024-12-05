@@ -86,15 +86,7 @@
 
 \section{Introduction}\label{intro}
 
-(Delete and Replace): This report will document your learning throughout the course. It will be a collection of your notes, homework solutions, and critical reflections on the content of the course. Something in between a semester-long take home exam and your own lecture notes.\footnote{One purpose of giving the report the form of lecture notes is that self-explanation is a technique proven to help with learning, see Chapter 6 of Craig Barton, How I Wish I'd Taught Maths, and references therein. In fact, the report can lead you from self-explanation (which is what you do for the weekly deadline) to explaining to others (which is what you do for the final submission). Another purpose is to help those of you who want to go on to graduate school to develop some basic writing skills. A report that you could proudly add to your application to graduate school (or a job application in industry) would give you full points.}
-
-To modify this template you need to modify the source \texttt{report.tex} which is available in the course repo. For guidance on how to do this read both the source and the pdf of \texttt{latex-example.tex} which is also available in the repo. Also check out the usual resources (Google, Stackoverflow, LLM, etc). It was never as easy as now to learn a new programming lanugage (which, btw, \LaTeX{} is).
-
-For writing \LaTeX{} with VSCode use the \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} extension. 
-
-There will be deadlines during the semester, graded mostly for completeness. That means that you will get the points if you submit in time and are on the right track, independently of whether the solutions are technically correct. You will have the opportunity to revise your work for the final submission of the full report.
-
-The full report is due at the end of the finals week. It will be graded according to the following guidelines.
+In this report, I aim to establish a comprehensive understanding of the fundamentals of programming languages through the application of Lean logic, recursion, LLMs, and parsers. This is achieved by developing a solid foundation in discrete mathematics, utilizing it to create a grammar file with Lark, and exploring how these principles act as a framework for the structure and functionality of programming languages. The report delves into the application of discrete mathematical concepts to define syntax and semantics, demonstrates the implementation of grammar using Lark for parsing, and highlights the integration of recursion and logic in constructing efficient solutions. By bridging theoretical knowledge with practical application, this report seeks to provide a holistic perspective on the fundamentals of programming languages.
 
 \section{Week by Week}\label{homework}
 
@@ -1207,12 +1199,24 @@ Write this section during the semester. This is approximately a quarter of apage
 
 Make sure that you use \LaTeX{} to structure your writing (eg by using subsections).
 
+\section{Seminars}\label{seminars}
+
+\subsection{Seminar Speaker: Dr. Ansel Teng}
+
+\subsubsection*{Summary}
+
+Dr. Ansel Teng's speaker event touched on the applications of AI in world the nonprofit organization fundraising. His works are dedicated towards a SaaS platform which utilizes both donor data and AI models to predict which people are most likely to donate, donate the most, and how to best contact them. Additionally, the SaaS also has lots of filtering which greatly increases the effectiveness of the software.
+
+\subsubsection*{Question}
+
+Would current donors decrease or cease donations after the realization that they are having all of their information extracted after giving a donation? And would the benefits outweigh the cost of that drawback?
+
 \section{Conclusion}\label{conclusion}
 
-(Delete and Replace): (approx 400 words) A critical reflection on the content of the course. Step back from the technical details. How does the course fit into the wider world of software engineering? What did you find most interesting or useful? What improvements would you suggest?
+From my perspective, in the wider world of software engineering, this course acts as a bridge between discrete math and any introductory python/java/c++ course. What I mean by this is that programming language seems to describe exactly how we’re able to utilize the basic calculations done in discrete math to create a programming language that uses it as building blocks. In total, it provides a solid foundation to understand exactly how computers are able to perform calculations using the most basic of operations. Additionally, this course seeks to provide students an understanding of prompt engineering and how we can use LLMs on a larger scale than just asking it a simple question; similar to how we use google.
 
-\begin{thebibliography}{99}
-\bibitem[BLA]{bla} Author, \href{https://en.wikipedia.org/wiki/LaTeX}{Title}, Publisher, Year.
-\end{thebibliography}
+Personally, the most interesting topic in this course was our use of grammar lark files. It was interesting to see how we could use a simple grammar file to define how the mathematical operators would work in a language. I appreciated the pacing of the unit since we first started off with implementing addition and multiplication and then moved onto division and parentheses. I also found stressing over elements such as parentheses or left-to-right priority which I had not stopped to consider the implementation of before. I believe through this unit I developed the ability to think more critically about how all of the parts work together in the lowest levels of abstraction within software. Lastly, to see the grammar come together at the end and being able to operate within the rules of PEMDAS perfectly gave a sense of accomplishment and progress regarding the course which helped build understanding and motivation towards learning more.
+
+As for improvements in the course, I would suggest a more high-level description of each unit during their introduction so that the students have a better idea of the unit's goal. I believe that creating a basic and easy to understand goal is the first step in developing an interest in the learning of a topic. Otherwise units can just become a system where students just go through the motions without any overarching understanding of the importance of the concepts. Moving on, I understand that since LLMs are in their infancy that it is difficult to implement them. I found almost all of the coding projects to serve little purpose since it mostly involved prompt engineering randomly until all of the tests cleared. I think it would be better to use assignments that feature near complete code snippets. This way professors can minimize the amount of busy work and just require students to complete a few lines of code that solidify understanding. Since, at the end of the day the goal is understanding and not completing the grammar since it serves no purpose.
 
 \end{document}
