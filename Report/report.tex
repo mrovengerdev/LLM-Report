@@ -100,87 +100,54 @@ Lectures introduced Lean, a programming language to help prove discrete mathemat
 
 Solved problems in Natural Numbers Game using Lean to help recap teachings from Discrete Mathematics. Specifically dealing with successors and predecessors and how they can be used to change certain sides to equal the other.
 
+\noindent
 Level 5/8:
-\begin{lstlisting}
-a + (b + 0) + (c + 0) = a + b + c
-rw [add_zero]
-a + b + (c + 0) = a + b + c
-rw [add_zero]
-a + b + c = a + b + c
-rfl
-\end{lstlisting}
+\begin{align*}
+a + (b + 0) + (c + 0) & = a + b + c & {\rm by \ add\_zero} \\
+a + b + (c + 0) & = a + b + c & {\rm by \ add\_zero} \\
+a + b + c & = a + b + c & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 6/8:
-\begin{lstlisting}
-a + (b + 0) + (c + 0) = a + b + c
-rw[add_zero c]
-a + (b + 0) + c = a + b + c
-rw[add_zero b]
-a + b + c = a + b + c
-rfl
-\end{lstlisting}
+\begin{align*}
+a + (b + 0) + (c + 0) & = a + b + c & {\rm by \ add\_zero \ on \ c} \\
+a + (b + 0) + c & = a + b + c & {\rm by \ add\_zero \ on \ b} \\
+a + b + c & = a + b + c & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 7/8:
-\begin{lstlisting}
-succ n = n + 1
-rw[one_eq_succ_zero]
-succ n = n + succ 0
-rw[add_succ]
-succ n = succ (n + 0)
-rw[add_zero]
-succ n = succ n
-rfl
-\end{lstlisting}
+\begin{align*}
+{\rm succ} \, n & = n + 1 & {\rm by \ one\_eq\_succ\_zero} \\
+& = n + {\rm succ} \, 0 & {\rm by \ add\_succ} \\
+& = {\rm succ} \, (n + 0) & {\rm by \ add\_zero} \\
+& = {\rm succ} \, n & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 8/8:
-\begin{lstlisting}
-2 + 2 = 4
-rw[four_eq_succ_three]
-2 + 2 = succ 3
-rw[three_eq_succ_two]
-2 + 2 = succ (succ 2)
-rw[two_eq_succ_one]
-succ 1 + succ 1 = succ (succ (succ 1))
-rw[add_succ]
-succ (succ 1 + 1) = succ (succ (succ 1))
-rw[succ_eq_add_one]
-succ 1 + 1 + 1 = succ (succ (succ 1))
-rw[succ_eq_add_one]
-1 + 1 + 1 + 1 = succ (succ (1 + 1))
-rw[succ_eq_add_one]
-1 + 1 + 1 + 1 = succ (1 + 1) + 1
-rw[succ_eq_add_one]
-1 + 1 + 1 + 1 = 1 + 1 + 1 + 1
-rfl
-\end{lstlisting}
+\begin{align*}
+2 + 2 & = 4 & {\rm by \ four\_eq\_succ\_three} \\
+2 + 2 & = {\rm succ} \, 3 & {\rm by \ three\_eq\_succ\_two} \\
+2 + 2 & = {\rm succ} \, ({\rm succ} \, 2) & {\rm by \ two\_eq\_succ\_one} \\
+{\rm succ} \, 1 + {\rm succ} \, 1 & = {\rm succ} \, ({\rm succ} \, ({\rm succ} \, 1)) & {\rm by \ add\_succ} \\
+{\rm succ} \, ({\rm succ} \, 1 + 1) & = {\rm succ} \, ({\rm succ} \, ({\rm succ} \, 1)) & {\rm by \ succ\_eq\_add\_one} \\
+{\rm succ} \, 1 + 1 + 1 & = {\rm succ} \, ({\rm succ} \, ({\rm succ} \, 1)) & {\rm by \ succ\_eq\_add\_one} \\
+1 + 1 + 1 + 1 & = {\rm succ} \, ({\rm succ} \, (1 + 1)) & {\rm by \ succ\_eq\_add\_one} \\
+1 + 1 + 1 + 1 & = {\rm succ} \, (1 + 1) + 1 & {\rm by \ succ\_eq\_add\_one} \\
+1 + 1 + 1 + 1 & = 1 + 1 + 1 + 1 & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
 For level 5/8 specifically, we can see that the Lean proof, \texttt{rw[add\_zero]}, corresponds to Proof Algorithm 1: Addition, in that any variable added to zero will ultimately equal just the variable. For example: $a + 0 = a$.
 
 From this homework, I learned how to use the Lean proof and saw how each function operated exactly like algorithms and proofs I had used in Discrete Mathematics.
-
-%In case you want to draw automata in Latex, you can use the tikz %package. Here is an example of a simple automaton:
-%
-%\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
-%  \node[state] (q_1)   {$q_1$}; 
-%  \node[state] (q_2) [above right=of q_1] {$q_2$}; 
-%  \node[state] (q_3) [below right=of q_2] {$q_3$}; 
-%   \path[->] 
-%   (q_1) edge  node {0} (q_2)
-%         edge  node [swap] {1} (q_3)
-%   (q_2) edge  node  {1} (q_3)
-%         edge [loop above] node {0} ()
-%   (q_3) edge [loop below] node {0,1} ();
-%\end{tikzpicture}
-%
-%By the way, GPT-4 is quite good at outputting tikz code.
 
 \subsubsection*{Comments and Questions}
 
 Although this week generally served as just an introduction to the curriculum and a recap of discrete mathematics, I am curious as to whether or not there was a better example to be shown of how exactly a computer uses discrete mathematics. At this point, I am knowledgeable of how discrete mathematics operates and how computers can use operators to conduct mathematical operations, but I have yet to see a direct example of a computer "thinking" through a math calculation.
 
 If the way computers have been taught mathematics is based purely on successors and predecessors, does that make other operations like multiplication, division, and exponents far more taxing on a CPU since they have to calculate an incredible amount of successors, or do the operators used to cause multiplication and exponentiation ignore that by just creating duplicates and adding them together?
-
-%I expect you to read the lecture notes. 
 
 \subsection{Week 2}
 
@@ -194,115 +161,66 @@ Lean contains tactics, Ex: rw, and theorems, Ex: one\_eq\_succ\_zero. Tactics ar
 
 \subsubsection*{Homework}
 
+\noindent
 Level 1/5:
-\[
-\begin{aligned}
-&0 + n = n \\
-&\text{induction } n \text{ with } d, \text{ hd} \\
-&0 + 0 = 0 \\
-&\text{rw}[\text{add\_zero}] \\
-&0 = 0 \\
-&\text{rfl} \\
-&0 + \text{succ } d = \text{succ } d \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (0 + d) = \text{succ } d \\
-&\text{rw}[\text{hd}] \\
-&\text{succ } d = \text{succ } d \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+0 + n & = n & {\rm by \ induction \ on \ } n \\
+0 + 0 & = 0 & {\rm by \ add\_zero} \\
+0 & = 0 & {\rm by \ reflexivity \ (rfl)} \\
+0 + {\rm succ} \, d & = {\rm succ} \, d & {\rm by \ add\_succ} \\
+{\rm succ} \, (0 + d) & = {\rm succ} \, d & {\rm by \ induction \ hypothesis \ (hd)} \\
+{\rm succ} \, d & = {\rm succ} \, d & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 2/5:
-\[
-\begin{aligned}
-&\text{succ } a + b = \text{succ } (a + b) \\
-&\text{induction } b \text{ with } b \\
-&\text{succ } a + 0 = \text{succ } (a + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&\text{succ } a = \text{succ } (a + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&\text{succ } a = \text{succ } a \\
-&\text{rfl} \\
-&\text{succ } a + \text{succ } b = \text{succ } (a + \text{succ } b) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (\text{succ } a + b) = \text{succ } (a + \text{succ } b) \\
-&\text{rw}[\text{n\_ih}] \\
-&\text{succ } (\text{succ } (a + b)) = \text{succ } (a + \text{succ } b) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (\text{succ } (a + b)) = \text{succ } (\text{succ } (a + b)) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+{\rm succ} \, a + b & = {\rm succ} \, (a + b) & {\rm by \ induction \ on \ } b \\
+{\rm succ} \, a + 0 & = {\rm succ} \, (a + 0) & {\rm by \ add\_zero} \\
+{\rm succ} \, a & = {\rm succ} \, a & {\rm by \ reflexivity \ (rfl)} \\
+{\rm succ} \, a + {\rm succ} \, b & = {\rm succ} \, (a + {\rm succ} \, b) & {\rm by \ add\_succ} \\
+{\rm succ} \, ({\rm succ} \, a + b) & = {\rm succ} \, (a + {\rm succ} \, b) & {\rm by \ induction \ hypothesis \ (n\_ih)} \\
+{\rm succ} \, ({\rm succ} \, (a + b)) & = {\rm succ} \, ({\rm succ} \, (a + b)) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 3/5:
-\[
-\begin{aligned}
-&a + b = b + a \\
-&\text{induction } b \text{ with } b, \text{ hb} \\
-&a + 0 = 0 + a \\
-&\text{rw}[\text{add\_zero}] \\
-&a = 0 + a \\
-&\text{rw}[\text{zero\_add}] \\
-&a = a \\
-&\text{rfl} \\
-&a + \text{succ } b = \text{succ } b + a \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b) = \text{succ } b + a \\
-&\text{rw}[\text{hb}] \\
-&\text{succ } (b + a) = \text{succ } b + a \\
-&\text{rw}[\text{succ\_add}] \\
-&\text{succ } (b + a) = \text{succ } (b + a) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+a + b & = b + a & {\rm by \ induction \ on \ } b \\
+a + 0 & = 0 + a & {\rm by \ add\_zero} \\
+a & = 0 + a & {\rm by \ zero\_add} \\
+a & = a & {\rm by \ reflexivity \ (rfl)} \\
+a + {\rm succ} \, b & = {\rm succ} \, b + a & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b) & = {\rm succ} \, b + a & {\rm by \ induction \ hypothesis \ (hb)} \\
+{\rm succ} \, (b + a) & = {\rm succ} \, b + a & {\rm by \ succ\_add} \\
+{\rm succ} \, (b + a) & = {\rm succ} \, (b + a) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 4/5:
-\[
-\begin{aligned}
-&a + b + c = a + (b + c) \\
-&\text{induction } c \text{ with } c, \text{ hc} \\
-&a + b + 0 = a + (b + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&a + b = a + (b + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&a + b = a + b \\
-&\text{rfl} \\
-&a + b + \text{succ } c = a + (b + \text{succ } c) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = a + (b + \text{succ } c) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = a + \text{succ } (b + c) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = \text{succ } (a + (b + c)) \\
-&\text{rw}[\text{hc}] \\
-&\text{succ } (a + (b + c)) = \text{succ } (a + (b + c)) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+a + b + c & = a + (b + c) & {\rm by \ induction \ on \ } c \\
+a + b + 0 & = a + (b + 0) & {\rm by \ add\_zero} \\
+a + b & = a + b & {\rm by \ reflexivity \ (rfl)} \\
+a + b + {\rm succ} \, c & = a + (b + {\rm succ} \, c) & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = a + (b + {\rm succ} \, c) & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = a + {\rm succ} \, (b + c) & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = {\rm succ} \, (a + (b + c)) & {\rm by \ induction \ hypothesis \ (hc)} \\
+{\rm succ} \, (a + (b + c)) & = {\rm succ} \, (a + (b + c)) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
-In Level 4, the Lean proof establishes the \textit{associativity of addition} through induction. The objective is to demonstrate that  a + (b + c) = (a + b) + c . The proof starts with the \textit{base case}  c = 0 , where the Lean rule  \texttt{add\_zero}  simplifies both sides to show equality. For the \textit{inductive step}, it is assumed that the property holds for a specific  c , and the goal is to prove it for  c + 1 , the \textit{successor of }  c . Lean uses  \texttt{add\_succ}  to rewrite the expression involving the successor function, then applies the inductive hypothesis. The proof concludes by demonstrating that both sides are equal, completing the argument. This approach mirrors the structure of discrete mathematics, where the base case at 0 is proven, and the property is extended to the \textit{successor of}  c.
-
+\noindent
 Level 5/5:
-\[
-\begin{aligned}
-&a + b + c = a + c + b \\
-&\text{induction } c \text{ with } c, \text{ hc} \\
-&a + b + 0 = a + 0 + b \\
-&\text{rw}[\text{add\_zero}, \text{add\_zero}] \\
-&a + b = a + b \\
-&\text{rfl} \\
-&a + b + \text{succ } c = a + \text{succ } c + b \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = a + \text{succ } c + b \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = \text{succ } (a + c) + b \\
-&\text{rw}[\text{succ\_add}] \\
-&\text{succ } (a + b + c) = \text{succ } (a + c + b) \\
-&\text{rw}[\text{hc}] \\
-&\text{succ } (a + c + b) = \text{succ } (a + c + b) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+a + b + c & = a + c + b & {\rm by \ induction \ on \ } c \\
+a + b + 0 & = a + 0 + b & {\rm by \ add\_zero \ and \ add\_zero} \\
+a + b & = a + b & {\rm by \ reflexivity \ (rfl)} \\
+a + b + {\rm succ} \, c & = a + {\rm succ} \, c + b & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = a + {\rm succ} \, c + b & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = {\rm succ} \, (a + c) + b & {\rm by \ succ\_add} \\
+{\rm succ} \, (a + b + c) & = {\rm succ} \, (a + c + b) & {\rm by \ induction \ hypothesis \ (hc)} \\
+{\rm succ} \, (a + c + b) & = {\rm succ} \, (a + c + b) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
 \subsubsection*{Comments and Questions}
 
