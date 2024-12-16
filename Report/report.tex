@@ -276,180 +276,118 @@ In this week's lecture, we learned about the logic behind AND and how computer's
 Similarly, in the natural numbers game, we saw the application of these theorems which allowed us to prove theorems in Lean. So if a refresher is needed, going through the "A Lean Intro To Logic" is a good idea.
 
 \subsubsection*{Homework}
+
 Level 1/8:
-\begin{lstlisting}
-todo_list: P
-exact todo_list
-\end{lstlisting}
+\begin{align*}
+{\rm todo\_list:}\ & P \\
+{\rm exact\ todo\_list}
+\end{align*}
 
 Level 2/8:
-\begin{lstlisting}
-(*@ $[ Goal: P \land S ]$ @*)
-exact and_intro p s
-\end{lstlisting}
+\begin{align*}
+{\rm Goal:}\ & P \land S \\
+{\rm exact\ and\_intro}\ p\ s
+\end{align*}
 
 Level 3/8:
-\begin{lstlisting}
-(*@ $[ Goal: (A \land I) \land O \land U ]$ @*)
-exact and_intro (and_intro a i) (and_intro o u)
-\end{lstlisting}
+\begin{align*}
+{\rm Goal:}\ & (A \land I) \land O \land U \\
+{\rm exact\ and\_intro\ (and\_intro\ a\ i)\ (and\_intro\ o\ u)}
+\end{align*}
 
 Level 4/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - vm: P \land S ]$ @*)
-have p := vm.left
-Assumptions: 
-  (*@ $[ - vm: P \land S ]$ @*)
-  (*@ $[ - p: P ]$ @*)
-exact p
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm vm:}\ P \land S \\
+{\rm have\ p := vm.left} \\
+{\rm Assumptions:} \\
+- {\rm vm:}\ P \land S \\
+- {\rm p:}\ P \\
+{\rm exact\ p}
+\end{align*}
 
 Level 5/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h: P \land Q ]$ @*)
-have q := and_right h
-Assumptions:
-  (*@ $[ - h: P \land Q ]$ @*)
-  (*@ $[ - q: Q ]$ @*)
-exact q
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h:}\ P \land Q \\
+{\rm have\ q := and\_right\ h} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ P \land Q \\
+- {\rm q:}\ Q \\
+{\rm exact\ q}
+\end{align*}
 
 Level 6/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h1: A \land I ]$ @*)
-  (*@ $[ - h2: O \land U ]$ @*)
-have A := and_left h1
-Assumptions:
-  (*@ $[ - h1: A \land I ]$ @*)
-  (*@ $[ - h2: O \land U ]$ @*)
-  (*@ $[ - A: A ]$ @*)
-have U := and_right h2
-Assumptions:
-  (*@ $[ - h1: A \land I ]$ @*)
-  (*@ $[ - h2: O \land U ]$ @*)
-  (*@ $[ - A: A ]$ @*)
-  (*@ $[ - U: U ]$ @*)
-exact and_intro A U
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h1:}\ A \land I \\
+- {\rm h2:}\ O \land U \\
+{\rm have\ A := and\_left\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h1:}\ A \land I \\
+- {\rm h2:}\ O \land U \\
+- {\rm A:}\ A \\
+{\rm have\ U := and\_right\ h2} \\
+{\rm Assumptions:} \\
+- {\rm h1:}\ A \land I \\
+- {\rm h2:}\ O \land U \\
+- {\rm A:}\ A \\
+- {\rm U:}\ U \\
+{\rm exact\ and\_intro\ A\ U}
+\end{align*}
 
 Level 7/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-have h1 := and_left h
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-have h2 := and_right h1
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-have h3 := and_left h2
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h3: (L \land C) \land L ]$ @*)
-have h4 := and_left h3
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h3: (L \land C) \land L ]$ @*)
-  (*@ $[ - h4: L \land C ]$ @*)
-have h5 := and_right h4
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h3: (L \land C) \land L ]$ @*)
-  (*@ $[ - h4: L \land C ]$ @*)
-  (*@ $[ - h5: C ]$ @*)
-exact h5
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+{\rm have\ h1 := and\_left\ h} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+{\rm have\ h2 := and\_right\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h2:}\ ((L \land C) \land L) \land L \land L \land L \\
+{\rm have\ h3 := and\_left\ h2} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h2:}\ ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h3:}\ (L \land C) \land L \\
+{\rm have\ h4 := and\_left\ h3} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h2:}\ ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h3:}\ (L \land C) \land L \\
+- {\rm h4:}\ L \land C \\
+{\rm have\ h5 := and\_right\ h4} \\
+{\rm exact\ h5}
+\end{align*}
 
 Level 8/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*) and_left (1)
-have h1 := and_left h
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-have h2 := and_left h1
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-have h3 := and_right h1
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-have h4 := and_right h
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-have h5 := and_right h4
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-have h6 := and_left h5
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h6: C \land \neg O ]$ @*)
-have h7 := and_left h6
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h6: C \land \neg O ]$ @*)
-  (*@ $[ - h7: C ]$ @*)
-have h8 := and_left h2
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h6: C \land \neg O ]$ @*)
-  (*@ $[ - h7: C ]$ @*)
-  (*@ $[ - h8: P ]$ @*)
-have h9 := and_right h2
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*) 
-  (*@ $[ - h2: P \land S ]$ @*) 
-  (*@ $[ - h3: A ]$ @*) 
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*) 
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*) 
-  (*@ $[ - h6: C \land \neg O ]$ @*) 
-  (*@ $[ - h7: C ]$ @*)
-  (*@ $[ - h8: P ]$ @*)
-  (*@ $[ - h9: S ]$ @*)
-exact and_intro h3 (and_intro h7 (and_intro h8 h9))
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+{\rm have\ h1 := and\_left\ h} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+- {\rm h1:}\ (P \land S) \land A \\
+{\rm have\ h2 := and\_left\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+- {\rm h1:}\ (P \land S) \land A \\
+- {\rm h2:}\ P \land S \\
+{\rm have\ h3 := and\_right\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+- {\rm h1:}\ (P \land S) \land A \\
+- {\rm h2:}\ P \land S \\
+- {\rm h3:}\ A \\
+{\rm exact\ and\_intro\ h3\ (and\_intro\ h2\ h1)}
+\end{align*}
+
 
 level 8/8 in Mathematical Logic
 \[
@@ -1109,13 +1047,25 @@ Are there any forms of recursion that we can apply towards the hat riddle that w
 
 \section{Lessons from the Assignments}
 
-(Delete and Replace): Write three pages about your individual contributions to the project.
+\subsubsection*{Milestone 1}
 
-On 3 pages you describe lessons you learned from the project. Be as technical and detailed as possible. Particularly valuable are \emph{interesting} examples where you connect concrete technical details with \emph{interesting} general observations or where the theory discussed in the lectures helped with the design or implementation of the project.
+From the moment of its creation, I assumed a leadership role for this project by immediately setting up a group chat to facilitate communication and coordination among team members. Next, I created the GitHub repository and established clear guidelines on how we would utilize branches to manage our work. Additionally, I separated our progress with each milestone within branches to act as an easy to use version control. This way, if our future milestones had taken a bad turn, we could just reset with the progress made in the previous milestone. This structure ensured that we could collaborate efficiently while minimizing the risk of conflicts or errors.
 
-Write this section during the semester. This is approximately a quarter of apage per week and the material should come from the work you do anyway. Just keep your eyes open for interesting lessons.
+Beyond these organizational efforts, during the first milestone I worked closely with my teammates to implement the required modifications to the \texttt{evaluate} and \texttt{substitute} functions for the new grammar. These changes were integral to incorporating the grammar Lark file that enabled addition, multiplication, and subtraction operations. This experience deepened my understanding of how interpreters for programming languages function. Specifically, I learned how to transform equations using a grammar Lark file and manage the order of operations, ensuring that multiplication took precedence over addition. These lessons not only enhanced my technical skills but also provided valuable insights into the inner workings of interpreters.
 
-Make sure that you use \LaTeX{} to structure your writing (eg by using subsections).
+Something I found especially noteworthy was the appearance of recursion, a topic which we had recently spoken of plenty. After viewing the code for the Tower of Hanoi solution, it became apparanent that the interpreter's task was extremely similar in almost every facet. For example, just like how the disks of the Tower of Hanoi had to follow a similar pattern, so did our interpreter. An example of this is how our interpreter needed to perform normalization to every equation before beginning to perform an operator on its components.
+
+\subsubsection*{Milestone 2}
+
+For the second milestone, my primary contribution was to integrate the new grammar into the existing grammar Lark file. Once again, I updated the \texttt{evaluate} and \texttt{substitute} functions to accommodate these changes. This phase of the project introduced new challenges, particularly in the realm of comparison operations. Through my work on this milestone, I gained a solid understanding of how comparisons are conducted within an interpreter and how the interpreter can compare values. More specifically, how interpreters can do so by utilizing the same mathematical thinking that was used in discrete mathematics.
+
+Unfortunately, milestone 2 also highlighted areas where I needed additional support. Specifically, I struggled to grasp the implementation of the logic behind how parentheses works within our grammar lark file. The additional layer of priority and complete formation of PEMDAS led to confusion on my end. Recognizing my limitations, I turned to my teammates for guidance. Their explanations and contributions helped bridge my knowledge gap and ensured that we could successfully integrate parentheses into the project. I felt that this experience was a valuable learning experience as it took a strong amount of introspection to discover such a knowledge gap and allowed us to move onto the next milestone.
+
+\subsubsection*{Milestone 3}
+
+In the final milestone, I continued to build on my strengths by integrating the new grammar into the grammar Lark file. However, the complexity of this milestone proved to be significantly greater than the previous ones. The use of lists within the programming language was particularly challenging for me, as it required a low-level understanding that I found difficult to grasp. Despite my efforts, I was unable to derive as much learning from this milestone as I had hoped.
+
+One of the key challenges during this phase was balancing the demands of milestone 3 with the impending final report. The deadlines combined with finals forced us to prioritize the final report during class time, which limited the time we could dedicate to fully understanding the grammar in milestone 3. Reflecting on this experience, I believe that both additional in-class time for group work and prioritizing a fleshed out group wide understanding before beginning each milestone would have been beneficial. These changes could have greatly changed the troublesome and difficult experience of milestone 3.
 
 \section{Seminars}\label{seminars}
 
@@ -1128,6 +1078,46 @@ Dr. Ansel Teng's speaker event touched on the applications of AI in world the no
 \subsubsection*{Question}
 
 Would current donors decrease or cease donations after the realization that they are having all of their information extracted after giving a donation? And would the benefits outweigh the cost of that drawback?
+
+\subsection{"Creating Your Own Programming Language" by Computerphile}
+
+\subsubsection*{Summary}
+
+I watched Computerphile's video "Creating Your Own Programming Language" which is about the process of designing a basic programming language using Python. It begins by constructing an interpreter capable of evaluating expressions with Reverse Polish Notation (RPN), employing a stack-based approach for efficient computation. As the language develops, features like variables are introduced, allowing for value assignment and reuse, along with support for multi-line code. The implementation is further enhanced with logic structures, such as loops and conditionals, which enable the interpreter to handle more complex tasks. An important section was the creation of a factorial function using a while loop, showcasing the versatility provided by combining loops and branching logic. The video also emphasizes practical techniques, such as Python’s split method for tokenization and the use of dictionaries for variable management. By the end, the language evolves into a functional tool capable of solving meaningful problems.
+
+\subsubsection*{Question}
+
+How would this programming language be created if not for the use of the C++/Python? How do you create a programming language without a programming language?
+
+\subsection{Stratefied Design Lens by Eric Normand}
+
+\subsubsection*{Summary}
+
+I listened to Eric Normand’s podcast on the stratified design lens, which emphasizes that effective software development isn’t about rigidly following rules but about making thoughtful design decisions by clearly separating different layers within an application. This stratified approach helps prevent a system from becoming brittle, as it allows each layer to evolve independently. Furthermore, this  It encourages thoughtful organization by placing logic where it truly belongs, making your software more adaptable and maintainable.
+
+\subsubsection*{Question}
+
+My Question: Is it still possible to separate the layers in a clear cut manner even when the model creates both complex rules and flexibility at the same time?
+
+\subsection{"Programming Loops vs Recursion" by Computerphile}
+
+\subsubsection*{Summary}
+
+I watched the “Programming Loops vs Recursion” video by Computerphile, which delved into the history and progression of loops in programming. The video highlighted the shift from early assembly languages to the emergence of high-level languages like FORTRAN. As programming languages evolved, nested loops were introduced, greatly enhancing the power of loops. This concept of nesting loops laid the groundwork for understanding the importance of recursion in programming. One notable takeaway was that nested loops enabled more complex calculations, making it possible to handle multi-dimensional problems like 2D arrays. However, even with the power of nested loops, there were still limitations, leading to the need for recursion to tackle more complex tasks, such as solving Ackermann’s function. The video also touched on how recursion is fundamental to compiler development, which relates to our class where we created lambda-calculus compilers.  
+
+\subsubsection*{Question}
+
+Would using earlier assembly languages to teach recursion help give students a better idea of how recursion works due to the elimination of any notable abstraction?
+
+\subsection{}
+
+\subsubsection*{Summary}
+
+In the Computerphile's video, "Coding a Web Server in 25 Lines," Dr. Laurence Tratt built a basic web server in Rust with just 25 lines of code. He starts off by creating a "listener" that only responds to his IP address to avoid any need to implement server security. Next up, he establishes the basic communication for a server, where when there is a request, the server listens, and there is a response. Lastly, he cuts a lot of corners and has the browser do the majority of the work for the response and is able to create a simple text response for the page with just one line.
+
+\subsubsection*{Question}
+
+Is this simplicity in web server design achievable with other languages that are dynamically typed such as Python?
 
 \section{Conclusion}\label{conclusion}
 
