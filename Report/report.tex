@@ -86,15 +86,7 @@
 
 \section{Introduction}\label{intro}
 
-(Delete and Replace): This report will document your learning throughout the course. It will be a collection of your notes, homework solutions, and critical reflections on the content of the course. Something in between a semester-long take home exam and your own lecture notes.\footnote{One purpose of giving the report the form of lecture notes is that self-explanation is a technique proven to help with learning, see Chapter 6 of Craig Barton, How I Wish I'd Taught Maths, and references therein. In fact, the report can lead you from self-explanation (which is what you do for the weekly deadline) to explaining to others (which is what you do for the final submission). Another purpose is to help those of you who want to go on to graduate school to develop some basic writing skills. A report that you could proudly add to your application to graduate school (or a job application in industry) would give you full points.}
-
-To modify this template you need to modify the source \texttt{report.tex} which is available in the course repo. For guidance on how to do this read both the source and the pdf of \texttt{latex-example.tex} which is also available in the repo. Also check out the usual resources (Google, Stackoverflow, LLM, etc). It was never as easy as now to learn a new programming lanugage (which, btw, \LaTeX{} is).
-
-For writing \LaTeX{} with VSCode use the \href{https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop}{LaTeX Workshop} extension. 
-
-There will be deadlines during the semester, graded mostly for completeness. That means that you will get the points if you submit in time and are on the right track, independently of whether the solutions are technically correct. You will have the opportunity to revise your work for the final submission of the full report.
-
-The full report is due at the end of the finals week. It will be graded according to the following guidelines.
+In this report, I aim to establish a comprehensive understanding of the fundamentals of programming languages through the application of Lean logic, recursion, LLMs, and parsers. This is achieved by developing a solid foundation in discrete mathematics, utilizing it to create a grammar file with Lark, and exploring how these principles act as a framework for the structure and functionality of programming languages. The report delves into the application of discrete mathematical concepts to define syntax and semantics, demonstrates the implementation of grammar using Lark for parsing, and highlights the integration of recursion and logic in constructing efficient solutions. By bridging theoretical knowledge with practical application, this report seeks to provide a holistic perspective on the fundamentals of programming languages.
 
 \section{Week by Week}\label{homework}
 
@@ -108,87 +100,54 @@ Lectures introduced Lean, a programming language to help prove discrete mathemat
 
 Solved problems in Natural Numbers Game using Lean to help recap teachings from Discrete Mathematics. Specifically dealing with successors and predecessors and how they can be used to change certain sides to equal the other.
 
+\noindent
 Level 5/8:
-\begin{lstlisting}
-a + (b + 0) + (c + 0) = a + b + c
-rw [add_zero]
-a + b + (c + 0) = a + b + c
-rw [add_zero]
-a + b + c = a + b + c
-rfl
-\end{lstlisting}
+\begin{align*}
+a + (b + 0) + (c + 0) & = a + b + c & {\rm by \ add\_zero} \\
+a + b + (c + 0) & = a + b + c & {\rm by \ add\_zero} \\
+a + b + c & = a + b + c & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 6/8:
-\begin{lstlisting}
-a + (b + 0) + (c + 0) = a + b + c
-rw[add_zero c]
-a + (b + 0) + c = a + b + c
-rw[add_zero b]
-a + b + c = a + b + c
-rfl
-\end{lstlisting}
+\begin{align*}
+a + (b + 0) + (c + 0) & = a + b + c & {\rm by \ add\_zero \ on \ c} \\
+a + (b + 0) + c & = a + b + c & {\rm by \ add\_zero \ on \ b} \\
+a + b + c & = a + b + c & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 7/8:
-\begin{lstlisting}
-succ n = n + 1
-rw[one_eq_succ_zero]
-succ n = n + succ 0
-rw[add_succ]
-succ n = succ (n + 0)
-rw[add_zero]
-succ n = succ n
-rfl
-\end{lstlisting}
+\begin{align*}
+{\rm succ} \, n & = n + 1 & {\rm by \ one\_eq\_succ\_zero} \\
+& = n + {\rm succ} \, 0 & {\rm by \ add\_succ} \\
+& = {\rm succ} \, (n + 0) & {\rm by \ add\_zero} \\
+& = {\rm succ} \, n & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 8/8:
-\begin{lstlisting}
-2 + 2 = 4
-rw[four_eq_succ_three]
-2 + 2 = succ 3
-rw[three_eq_succ_two]
-2 + 2 = succ (succ 2)
-rw[two_eq_succ_one]
-succ 1 + succ 1 = succ (succ (succ 1))
-rw[add_succ]
-succ (succ 1 + 1) = succ (succ (succ 1))
-rw[succ_eq_add_one]
-succ 1 + 1 + 1 = succ (succ (succ 1))
-rw[succ_eq_add_one]
-1 + 1 + 1 + 1 = succ (succ (1 + 1))
-rw[succ_eq_add_one]
-1 + 1 + 1 + 1 = succ (1 + 1) + 1
-rw[succ_eq_add_one]
-1 + 1 + 1 + 1 = 1 + 1 + 1 + 1
-rfl
-\end{lstlisting}
+\begin{align*}
+2 + 2 & = 4 & {\rm by \ four\_eq\_succ\_three} \\
+2 + 2 & = {\rm succ} \, 3 & {\rm by \ three\_eq\_succ\_two} \\
+2 + 2 & = {\rm succ} \, ({\rm succ} \, 2) & {\rm by \ two\_eq\_succ\_one} \\
+{\rm succ} \, 1 + {\rm succ} \, 1 & = {\rm succ} \, ({\rm succ} \, ({\rm succ} \, 1)) & {\rm by \ add\_succ} \\
+{\rm succ} \, ({\rm succ} \, 1 + 1) & = {\rm succ} \, ({\rm succ} \, ({\rm succ} \, 1)) & {\rm by \ succ\_eq\_add\_one} \\
+{\rm succ} \, 1 + 1 + 1 & = {\rm succ} \, ({\rm succ} \, ({\rm succ} \, 1)) & {\rm by \ succ\_eq\_add\_one} \\
+1 + 1 + 1 + 1 & = {\rm succ} \, ({\rm succ} \, (1 + 1)) & {\rm by \ succ\_eq\_add\_one} \\
+1 + 1 + 1 + 1 & = {\rm succ} \, (1 + 1) + 1 & {\rm by \ succ\_eq\_add\_one} \\
+1 + 1 + 1 + 1 & = 1 + 1 + 1 + 1 & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
 For level 5/8 specifically, we can see that the Lean proof, \texttt{rw[add\_zero]}, corresponds to Proof Algorithm 1: Addition, in that any variable added to zero will ultimately equal just the variable. For example: $a + 0 = a$.
 
 From this homework, I learned how to use the Lean proof and saw how each function operated exactly like algorithms and proofs I had used in Discrete Mathematics.
-
-%In case you want to draw automata in Latex, you can use the tikz %package. Here is an example of a simple automaton:
-%
-%\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto] 
-%  \node[state] (q_1)   {$q_1$}; 
-%  \node[state] (q_2) [above right=of q_1] {$q_2$}; 
-%  \node[state] (q_3) [below right=of q_2] {$q_3$}; 
-%   \path[->] 
-%   (q_1) edge  node {0} (q_2)
-%         edge  node [swap] {1} (q_3)
-%   (q_2) edge  node  {1} (q_3)
-%         edge [loop above] node {0} ()
-%   (q_3) edge [loop below] node {0,1} ();
-%\end{tikzpicture}
-%
-%By the way, GPT-4 is quite good at outputting tikz code.
 
 \subsubsection*{Comments and Questions}
 
 Although this week generally served as just an introduction to the curriculum and a recap of discrete mathematics, I am curious as to whether or not there was a better example to be shown of how exactly a computer uses discrete mathematics. At this point, I am knowledgeable of how discrete mathematics operates and how computers can use operators to conduct mathematical operations, but I have yet to see a direct example of a computer "thinking" through a math calculation.
 
 If the way computers have been taught mathematics is based purely on successors and predecessors, does that make other operations like multiplication, division, and exponents far more taxing on a CPU since they have to calculate an incredible amount of successors, or do the operators used to cause multiplication and exponentiation ignore that by just creating duplicates and adding them together?
-
-%I expect you to read the lecture notes. 
 
 \subsection{Week 2}
 
@@ -202,115 +161,66 @@ Lean contains tactics, Ex: rw, and theorems, Ex: one\_eq\_succ\_zero. Tactics ar
 
 \subsubsection*{Homework}
 
+\noindent
 Level 1/5:
-\[
-\begin{aligned}
-&0 + n = n \\
-&\text{induction } n \text{ with } d, \text{ hd} \\
-&0 + 0 = 0 \\
-&\text{rw}[\text{add\_zero}] \\
-&0 = 0 \\
-&\text{rfl} \\
-&0 + \text{succ } d = \text{succ } d \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (0 + d) = \text{succ } d \\
-&\text{rw}[\text{hd}] \\
-&\text{succ } d = \text{succ } d \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+0 + n & = n & {\rm by \ induction \ on \ } n \\
+0 + 0 & = 0 & {\rm by \ add\_zero} \\
+0 & = 0 & {\rm by \ reflexivity \ (rfl)} \\
+0 + {\rm succ} \, d & = {\rm succ} \, d & {\rm by \ add\_succ} \\
+{\rm succ} \, (0 + d) & = {\rm succ} \, d & {\rm by \ induction \ hypothesis \ (hd)} \\
+{\rm succ} \, d & = {\rm succ} \, d & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 2/5:
-\[
-\begin{aligned}
-&\text{succ } a + b = \text{succ } (a + b) \\
-&\text{induction } b \text{ with } b \\
-&\text{succ } a + 0 = \text{succ } (a + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&\text{succ } a = \text{succ } (a + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&\text{succ } a = \text{succ } a \\
-&\text{rfl} \\
-&\text{succ } a + \text{succ } b = \text{succ } (a + \text{succ } b) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (\text{succ } a + b) = \text{succ } (a + \text{succ } b) \\
-&\text{rw}[\text{n\_ih}] \\
-&\text{succ } (\text{succ } (a + b)) = \text{succ } (a + \text{succ } b) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (\text{succ } (a + b)) = \text{succ } (\text{succ } (a + b)) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+{\rm succ} \, a + b & = {\rm succ} \, (a + b) & {\rm by \ induction \ on \ } b \\
+{\rm succ} \, a + 0 & = {\rm succ} \, (a + 0) & {\rm by \ add\_zero} \\
+{\rm succ} \, a & = {\rm succ} \, a & {\rm by \ reflexivity \ (rfl)} \\
+{\rm succ} \, a + {\rm succ} \, b & = {\rm succ} \, (a + {\rm succ} \, b) & {\rm by \ add\_succ} \\
+{\rm succ} \, ({\rm succ} \, a + b) & = {\rm succ} \, (a + {\rm succ} \, b) & {\rm by \ induction \ hypothesis \ (n\_ih)} \\
+{\rm succ} \, ({\rm succ} \, (a + b)) & = {\rm succ} \, ({\rm succ} \, (a + b)) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 3/5:
-\[
-\begin{aligned}
-&a + b = b + a \\
-&\text{induction } b \text{ with } b, \text{ hb} \\
-&a + 0 = 0 + a \\
-&\text{rw}[\text{add\_zero}] \\
-&a = 0 + a \\
-&\text{rw}[\text{zero\_add}] \\
-&a = a \\
-&\text{rfl} \\
-&a + \text{succ } b = \text{succ } b + a \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b) = \text{succ } b + a \\
-&\text{rw}[\text{hb}] \\
-&\text{succ } (b + a) = \text{succ } b + a \\
-&\text{rw}[\text{succ\_add}] \\
-&\text{succ } (b + a) = \text{succ } (b + a) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+a + b & = b + a & {\rm by \ induction \ on \ } b \\
+a + 0 & = 0 + a & {\rm by \ add\_zero} \\
+a & = 0 + a & {\rm by \ zero\_add} \\
+a & = a & {\rm by \ reflexivity \ (rfl)} \\
+a + {\rm succ} \, b & = {\rm succ} \, b + a & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b) & = {\rm succ} \, b + a & {\rm by \ induction \ hypothesis \ (hb)} \\
+{\rm succ} \, (b + a) & = {\rm succ} \, b + a & {\rm by \ succ\_add} \\
+{\rm succ} \, (b + a) & = {\rm succ} \, (b + a) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
+\noindent
 Level 4/5:
-\[
-\begin{aligned}
-&a + b + c = a + (b + c) \\
-&\text{induction } c \text{ with } c, \text{ hc} \\
-&a + b + 0 = a + (b + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&a + b = a + (b + 0) \\
-&\text{rw}[\text{add\_zero}] \\
-&a + b = a + b \\
-&\text{rfl} \\
-&a + b + \text{succ } c = a + (b + \text{succ } c) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = a + (b + \text{succ } c) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = a + \text{succ } (b + c) \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = \text{succ } (a + (b + c)) \\
-&\text{rw}[\text{hc}] \\
-&\text{succ } (a + (b + c)) = \text{succ } (a + (b + c)) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+a + b + c & = a + (b + c) & {\rm by \ induction \ on \ } c \\
+a + b + 0 & = a + (b + 0) & {\rm by \ add\_zero} \\
+a + b & = a + b & {\rm by \ reflexivity \ (rfl)} \\
+a + b + {\rm succ} \, c & = a + (b + {\rm succ} \, c) & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = a + (b + {\rm succ} \, c) & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = a + {\rm succ} \, (b + c) & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = {\rm succ} \, (a + (b + c)) & {\rm by \ induction \ hypothesis \ (hc)} \\
+{\rm succ} \, (a + (b + c)) & = {\rm succ} \, (a + (b + c)) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
-In Level 4, the Lean proof establishes the \textit{associativity of addition} through induction. The objective is to demonstrate that  a + (b + c) = (a + b) + c . The proof starts with the \textit{base case}  c = 0 , where the Lean rule  \texttt{add\_zero}  simplifies both sides to show equality. For the \textit{inductive step}, it is assumed that the property holds for a specific  c , and the goal is to prove it for  c + 1 , the \textit{successor of }  c . Lean uses  \texttt{add\_succ}  to rewrite the expression involving the successor function, then applies the inductive hypothesis. The proof concludes by demonstrating that both sides are equal, completing the argument. This approach mirrors the structure of discrete mathematics, where the base case at 0 is proven, and the property is extended to the \textit{successor of}  c.
-
+\noindent
 Level 5/5:
-\[
-\begin{aligned}
-&a + b + c = a + c + b \\
-&\text{induction } c \text{ with } c, \text{ hc} \\
-&a + b + 0 = a + 0 + b \\
-&\text{rw}[\text{add\_zero}, \text{add\_zero}] \\
-&a + b = a + b \\
-&\text{rfl} \\
-&a + b + \text{succ } c = a + \text{succ } c + b \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = a + \text{succ } c + b \\
-&\text{rw}[\text{add\_succ}] \\
-&\text{succ } (a + b + c) = \text{succ } (a + c) + b \\
-&\text{rw}[\text{succ\_add}] \\
-&\text{succ } (a + b + c) = \text{succ } (a + c + b) \\
-&\text{rw}[\text{hc}] \\
-&\text{succ } (a + c + b) = \text{succ } (a + c + b) \\
-&\text{rfl} \\
-\end{aligned}
-\]
+\begin{align*}
+a + b + c & = a + c + b & {\rm by \ induction \ on \ } c \\
+a + b + 0 & = a + 0 + b & {\rm by \ add\_zero \ and \ add\_zero} \\
+a + b & = a + b & {\rm by \ reflexivity \ (rfl)} \\
+a + b + {\rm succ} \, c & = a + {\rm succ} \, c + b & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = a + {\rm succ} \, c + b & {\rm by \ add\_succ} \\
+{\rm succ} \, (a + b + c) & = {\rm succ} \, (a + c) + b & {\rm by \ succ\_add} \\
+{\rm succ} \, (a + b + c) & = {\rm succ} \, (a + c + b) & {\rm by \ induction \ hypothesis \ (hc)} \\
+{\rm succ} \, (a + c + b) & = {\rm succ} \, (a + c + b) & {\rm by \ reflexivity \ (rfl)}
+\end{align*}
 
 \subsubsection*{Comments and Questions}
 
@@ -366,180 +276,118 @@ In this week's lecture, we learned about the logic behind AND and how computer's
 Similarly, in the natural numbers game, we saw the application of these theorems which allowed us to prove theorems in Lean. So if a refresher is needed, going through the "A Lean Intro To Logic" is a good idea.
 
 \subsubsection*{Homework}
+
 Level 1/8:
-\begin{lstlisting}
-todo_list: P
-exact todo_list
-\end{lstlisting}
+\begin{align*}
+{\rm todo\_list:}\ & P \\
+{\rm exact\ todo\_list}
+\end{align*}
 
 Level 2/8:
-\begin{lstlisting}
-(*@ $[ Goal: P \land S ]$ @*)
-exact and_intro p s
-\end{lstlisting}
+\begin{align*}
+{\rm Goal:}\ & P \land S \\
+{\rm exact\ and\_intro}\ p\ s
+\end{align*}
 
 Level 3/8:
-\begin{lstlisting}
-(*@ $[ Goal: (A \land I) \land O \land U ]$ @*)
-exact and_intro (and_intro a i) (and_intro o u)
-\end{lstlisting}
+\begin{align*}
+{\rm Goal:}\ & (A \land I) \land O \land U \\
+{\rm exact\ and\_intro\ (and\_intro\ a\ i)\ (and\_intro\ o\ u)}
+\end{align*}
 
 Level 4/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - vm: P \land S ]$ @*)
-have p := vm.left
-Assumptions: 
-  (*@ $[ - vm: P \land S ]$ @*)
-  (*@ $[ - p: P ]$ @*)
-exact p
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm vm:}\ P \land S \\
+{\rm have\ p := vm.left} \\
+{\rm Assumptions:} \\
+- {\rm vm:}\ P \land S \\
+- {\rm p:}\ P \\
+{\rm exact\ p}
+\end{align*}
 
 Level 5/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h: P \land Q ]$ @*)
-have q := and_right h
-Assumptions:
-  (*@ $[ - h: P \land Q ]$ @*)
-  (*@ $[ - q: Q ]$ @*)
-exact q
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h:}\ P \land Q \\
+{\rm have\ q := and\_right\ h} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ P \land Q \\
+- {\rm q:}\ Q \\
+{\rm exact\ q}
+\end{align*}
 
 Level 6/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h1: A \land I ]$ @*)
-  (*@ $[ - h2: O \land U ]$ @*)
-have A := and_left h1
-Assumptions:
-  (*@ $[ - h1: A \land I ]$ @*)
-  (*@ $[ - h2: O \land U ]$ @*)
-  (*@ $[ - A: A ]$ @*)
-have U := and_right h2
-Assumptions:
-  (*@ $[ - h1: A \land I ]$ @*)
-  (*@ $[ - h2: O \land U ]$ @*)
-  (*@ $[ - A: A ]$ @*)
-  (*@ $[ - U: U ]$ @*)
-exact and_intro A U
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h1:}\ A \land I \\
+- {\rm h2:}\ O \land U \\
+{\rm have\ A := and\_left\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h1:}\ A \land I \\
+- {\rm h2:}\ O \land U \\
+- {\rm A:}\ A \\
+{\rm have\ U := and\_right\ h2} \\
+{\rm Assumptions:} \\
+- {\rm h1:}\ A \land I \\
+- {\rm h2:}\ O \land U \\
+- {\rm A:}\ A \\
+- {\rm U:}\ U \\
+{\rm exact\ and\_intro\ A\ U}
+\end{align*}
 
 Level 7/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-have h1 := and_left h
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-have h2 := and_right h1
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-have h3 := and_left h2
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h3: (L \land C) \land L ]$ @*)
-have h4 := and_left h3
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h3: (L \land C) \land L ]$ @*)
-  (*@ $[ - h4: L \land C ]$ @*)
-have h5 := and_right h4
-Assumptions:
-  (*@ $[ - h: (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L ]$ @*)
-  (*@ $[ - h1: L \land ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h2: ((L \land C) \land L) \land L \land L \land L ]$ @*)
-  (*@ $[ - h3: (L \land C) \land L ]$ @*)
-  (*@ $[ - h4: L \land C ]$ @*)
-  (*@ $[ - h5: C ]$ @*)
-exact h5
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+{\rm have\ h1 := and\_left\ h} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+{\rm have\ h2 := and\_right\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h2:}\ ((L \land C) \land L) \land L \land L \land L \\
+{\rm have\ h3 := and\_left\ h2} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h2:}\ ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h3:}\ (L \land C) \land L \\
+{\rm have\ h4 := and\_left\ h3} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ (L \land ((L \land C) \land L) \land L \land L \land L) \land (L \land L) \land L \\
+- {\rm h1:}\ L \land ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h2:}\ ((L \land C) \land L) \land L \land L \land L \\
+- {\rm h3:}\ (L \land C) \land L \\
+- {\rm h4:}\ L \land C \\
+{\rm have\ h5 := and\_right\ h4} \\
+{\rm exact\ h5}
+\end{align*}
 
 Level 8/8:
-\begin{lstlisting}
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*) and_left (1)
-have h1 := and_left h
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-have h2 := and_left h1
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-have h3 := and_right h1
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-have h4 := and_right h
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-have h5 := and_right h4
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-have h6 := and_left h5
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h6: C \land \neg O ]$ @*)
-have h7 := and_left h6
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h6: C \land \neg O ]$ @*)
-  (*@ $[ - h7: C ]$ @*)
-have h8 := and_left h2
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*)
-  (*@ $[ - h2: P \land S ]$ @*)
-  (*@ $[ - h3: A ]$ @*)
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h6: C \land \neg O ]$ @*)
-  (*@ $[ - h7: C ]$ @*)
-  (*@ $[ - h8: P ]$ @*)
-have h9 := and_right h2
-Assumptions:
-  (*@ $[ - h: ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U ]$ @*)
-  (*@ $[ - h1: (P \land S) \land A ]$ @*) 
-  (*@ $[ - h2: P \land S ]$ @*) 
-  (*@ $[ - h3: A ]$ @*) 
-  (*@ $[ - h4: \neg I \land (C \land \neg O) \land \neg U ]$ @*) 
-  (*@ $[ - h5: (C \land \neg O) \land \neg U ]$ @*) 
-  (*@ $[ - h6: C \land \neg O ]$ @*) 
-  (*@ $[ - h7: C ]$ @*)
-  (*@ $[ - h8: P ]$ @*)
-  (*@ $[ - h9: S ]$ @*)
-exact and_intro h3 (and_intro h7 (and_intro h8 h9))
-\end{lstlisting}
+\begin{align*}
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+{\rm have\ h1 := and\_left\ h} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+- {\rm h1:}\ (P \land S) \land A \\
+{\rm have\ h2 := and\_left\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+- {\rm h1:}\ (P \land S) \land A \\
+- {\rm h2:}\ P \land S \\
+{\rm have\ h3 := and\_right\ h1} \\
+{\rm Assumptions:} \\
+- {\rm h:}\ ((P \land S) \land A) \land \neg I \land (C \land \neg O) \land \neg U \\
+- {\rm h1:}\ (P \land S) \land A \\
+- {\rm h2:}\ P \land S \\
+- {\rm h3:}\ A \\
+{\rm exact\ and\_intro\ h3\ (and\_intro\ h2\ h1)}
+\end{align*}
+
 
 level 8/8 in Mathematical Logic
 \[
@@ -1199,20 +1047,84 @@ Are there any forms of recursion that we can apply towards the hat riddle that w
 
 \section{Lessons from the Assignments}
 
-(Delete and Replace): Write three pages about your individual contributions to the project.
+\subsubsection*{Milestone 1}
 
-On 3 pages you describe lessons you learned from the project. Be as technical and detailed as possible. Particularly valuable are \emph{interesting} examples where you connect concrete technical details with \emph{interesting} general observations or where the theory discussed in the lectures helped with the design or implementation of the project.
+From the moment of its creation, I assumed a leadership role for this project by immediately setting up a group chat to facilitate communication and coordination among team members. Next, I created the GitHub repository and established clear guidelines on how we would utilize branches to manage our work. Additionally, I separated our progress with each milestone within branches to act as an easy to use version control. This way, if our future milestones had taken a bad turn, we could just reset with the progress made in the previous milestone. This structure ensured that we could collaborate efficiently while minimizing the risk of conflicts or errors.
 
-Write this section during the semester. This is approximately a quarter of apage per week and the material should come from the work you do anyway. Just keep your eyes open for interesting lessons.
+Beyond these organizational efforts, during the first milestone I worked closely with my teammates to implement the required modifications to the \texttt{evaluate} and \texttt{substitute} functions for the new grammar. These changes were integral to incorporating the grammar Lark file that enabled addition, multiplication, and subtraction operations. This experience deepened my understanding of how interpreters for programming languages function. Specifically, I learned how to transform equations using a grammar Lark file and manage the order of operations, ensuring that multiplication took precedence over addition. These lessons not only enhanced my technical skills but also provided valuable insights into the inner workings of interpreters.
 
-Make sure that you use \LaTeX{} to structure your writing (eg by using subsections).
+Something I found especially noteworthy was the appearance of recursion, a topic which we had recently spoken of plenty. After viewing the code for the Tower of Hanoi solution, it became apparanent that the interpreter's task was extremely similar in almost every facet. For example, just like how the disks of the Tower of Hanoi had to follow a similar pattern, so did our interpreter. An example of this is how our interpreter needed to perform normalization to every equation before beginning to perform an operator on its components.
+
+\subsubsection*{Milestone 2}
+
+For the second milestone, my primary contribution was to integrate the new grammar into the existing grammar Lark file. Once again, I updated the \texttt{evaluate} and \texttt{substitute} functions to accommodate these changes. This phase of the project introduced new challenges, particularly in the realm of comparison operations. Through my work on this milestone, I gained a solid understanding of how comparisons are conducted within an interpreter and how the interpreter can compare values. More specifically, how interpreters can do so by utilizing the same mathematical thinking that was used in discrete mathematics.
+
+Unfortunately, milestone 2 also highlighted areas where I needed additional support. Specifically, I struggled to grasp the implementation of the logic behind how parentheses works within our grammar lark file. The additional layer of priority and complete formation of PEMDAS led to confusion on my end. Recognizing my limitations, I turned to my teammates for guidance. Their explanations and contributions helped bridge my knowledge gap and ensured that we could successfully integrate parentheses into the project. I felt that this experience was a valuable learning experience as it took a strong amount of introspection to discover such a knowledge gap and allowed us to move onto the next milestone.
+
+\subsubsection*{Milestone 3}
+
+In the final milestone, I continued to build on my strengths by integrating the new grammar into the grammar Lark file. However, the complexity of this milestone proved to be significantly greater than the previous ones. The use of lists within the programming language was particularly challenging for me, as it required a low-level understanding that I found difficult to grasp. Despite my efforts, I was unable to derive as much learning from this milestone as I had hoped.
+
+One of the key challenges during this phase was balancing the demands of milestone 3 with the impending final report. The deadlines combined with finals forced us to prioritize the final report during class time, which limited the time we could dedicate to fully understanding the grammar in milestone 3. Reflecting on this experience, I believe that both additional in-class time for group work and prioritizing a fleshed out group wide understanding before beginning each milestone would have been beneficial. These changes could have greatly changed the troublesome and difficult experience of milestone 3.
+
+\section{Seminars}\label{seminars}
+
+\subsection{Seminar Speaker: Dr. Ansel Teng}
+
+\subsubsection*{Summary}
+
+Dr. Ansel Teng's speaker event touched on the applications of AI in world the nonprofit organization fundraising. His works are dedicated towards a SaaS platform which utilizes both donor data and AI models to predict which people are most likely to donate, donate the most, and how to best contact them. Additionally, the SaaS also has lots of filtering which greatly increases the effectiveness of the software.
+
+\subsubsection*{Question}
+
+Would current donors decrease or cease donations after the realization that they are having all of their information extracted after giving a donation? And would the benefits outweigh the cost of that drawback?
+
+\subsection{"Creating Your Own Programming Language" by Computerphile}
+
+\subsubsection*{Summary}
+
+I watched Computerphile's video "Creating Your Own Programming Language" which is about the process of designing a basic programming language using Python. It begins by constructing an interpreter capable of evaluating expressions with Reverse Polish Notation (RPN), employing a stack-based approach for efficient computation. As the language develops, features like variables are introduced, allowing for value assignment and reuse, along with support for multi-line code. The implementation is further enhanced with logic structures, such as loops and conditionals, which enable the interpreter to handle more complex tasks. An important section was the creation of a factorial function using a while loop, showcasing the versatility provided by combining loops and branching logic. The video also emphasizes practical techniques, such as Python’s split method for tokenization and the use of dictionaries for variable management. By the end, the language evolves into a functional tool capable of solving meaningful problems.
+
+\subsubsection*{Question}
+
+How would this programming language be created if not for the use of the C++/Python? How do you create a programming language without a programming language?
+
+\subsection{Stratefied Design Lens by Eric Normand}
+
+\subsubsection*{Summary}
+
+I listened to Eric Normand’s podcast on the stratified design lens, which emphasizes that effective software development isn’t about rigidly following rules but about making thoughtful design decisions by clearly separating different layers within an application. This stratified approach helps prevent a system from becoming brittle, as it allows each layer to evolve independently. Furthermore, this  It encourages thoughtful organization by placing logic where it truly belongs, making your software more adaptable and maintainable.
+
+\subsubsection*{Question}
+
+My Question: Is it still possible to separate the layers in a clear cut manner even when the model creates both complex rules and flexibility at the same time?
+
+\subsection{"Programming Loops vs Recursion" by Computerphile}
+
+\subsubsection*{Summary}
+
+I watched the “Programming Loops vs Recursion” video by Computerphile, which delved into the history and progression of loops in programming. The video highlighted the shift from early assembly languages to the emergence of high-level languages like FORTRAN. As programming languages evolved, nested loops were introduced, greatly enhancing the power of loops. This concept of nesting loops laid the groundwork for understanding the importance of recursion in programming. One notable takeaway was that nested loops enabled more complex calculations, making it possible to handle multi-dimensional problems like 2D arrays. However, even with the power of nested loops, there were still limitations, leading to the need for recursion to tackle more complex tasks, such as solving Ackermann’s function. The video also touched on how recursion is fundamental to compiler development, which relates to our class where we created lambda-calculus compilers.  
+
+\subsubsection*{Question}
+
+Would using earlier assembly languages to teach recursion help give students a better idea of how recursion works due to the elimination of any notable abstraction?
+
+\subsection{}
+
+\subsubsection*{Summary}
+
+In the Computerphile's video, "Coding a Web Server in 25 Lines," Dr. Laurence Tratt built a basic web server in Rust with just 25 lines of code. He starts off by creating a "listener" that only responds to his IP address to avoid any need to implement server security. Next up, he establishes the basic communication for a server, where when there is a request, the server listens, and there is a response. Lastly, he cuts a lot of corners and has the browser do the majority of the work for the response and is able to create a simple text response for the page with just one line.
+
+\subsubsection*{Question}
+
+Is this simplicity in web server design achievable with other languages that are dynamically typed such as Python?
 
 \section{Conclusion}\label{conclusion}
 
-(Delete and Replace): (approx 400 words) A critical reflection on the content of the course. Step back from the technical details. How does the course fit into the wider world of software engineering? What did you find most interesting or useful? What improvements would you suggest?
+From my perspective, in the wider world of software engineering, this course acts as a bridge between discrete math and any introductory python/java/c++ course. What I mean by this is that programming language seems to describe exactly how we’re able to utilize the basic calculations done in discrete math to create a programming language that uses it as building blocks. In total, it provides a solid foundation to understand exactly how computers are able to perform calculations using the most basic of operations. Additionally, this course seeks to provide students an understanding of prompt engineering and how we can use LLMs on a larger scale than just asking it a simple question; similar to how we use google.
 
-\begin{thebibliography}{99}
-\bibitem[BLA]{bla} Author, \href{https://en.wikipedia.org/wiki/LaTeX}{Title}, Publisher, Year.
-\end{thebibliography}
+Personally, the most interesting topic in this course was our use of grammar lark files. It was interesting to see how we could use a simple grammar file to define how the mathematical operators would work in a language. I appreciated the pacing of the unit since we first started off with implementing addition and multiplication and then moved onto division and parentheses. I also found stressing over elements such as parentheses or left-to-right priority which I had not stopped to consider the implementation of before. I believe through this unit I developed the ability to think more critically about how all of the parts work together in the lowest levels of abstraction within software. Lastly, to see the grammar come together at the end and being able to operate within the rules of PEMDAS perfectly gave a sense of accomplishment and progress regarding the course which helped build understanding and motivation towards learning more.
+
+As for improvements in the course, I would suggest a more high-level description of each unit during their introduction so that the students have a better idea of the unit's goal. I believe that creating a basic and easy to understand goal is the first step in developing an interest in the learning of a topic. Otherwise units can just become a system where students just go through the motions without any overarching understanding of the importance of the concepts. Moving on, I understand that since LLMs are in their infancy that it is difficult to implement them. I found almost all of the coding projects to serve little purpose since it mostly involved prompt engineering randomly until all of the tests cleared. I think it would be better to use assignments that feature near complete code snippets. This way professors can minimize the amount of busy work and just require students to complete a few lines of code that solidify understanding. Since, at the end of the day the goal is understanding and not completing the grammar since it serves no purpose.
 
 \end{document}
